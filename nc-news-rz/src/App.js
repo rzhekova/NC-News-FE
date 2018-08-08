@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import "./App.css";
-import Homepage from "./components/Homepage";
+import Home from "./components/Home";
 
 class App extends Component {
   render() {
-    return <Homepage />;
+    return <Home />;
   }
 }
 

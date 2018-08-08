@@ -1,28 +1,45 @@
 import React, { Component } from "react";
-import List from "./List";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 class Topics extends Component {
   state = {
-    topics: [{ id: 1, topic_slug: "coding" }, { id: 2, topic_slug: "football" }]
+    articlesByTopic: []
   };
   render() {
-    const { topics } = this.state;
+    const { articlesByTopic } = this.state;
     return (
-      <main>
-        <header>
-          <h2>Topics</h2>
-        </header>
-        {topics.map(topic => {
-          return (
-            <Link to={`/topics/${topic.topic_slug}/articles`}>
-              <p>{topic.topic_slug}</p>
-            </Link>
-          );
-        })}
-      </main>
+      <div>
+        <ul>
+          {articlesByTopic.map(article => {
+            return <li key={article._id}>{article.title}</li>;
+          })}
+        </ul>
+      </div>
     );
   }
+
+  componentDidMount() {
+    const { topic } = this.props.match.params;
+    this.fetchArticlesPerTopic(topic).then(articles => {
+      this.setState({ articlesByTopic: articles });
+    });
+  }
+  componentDidUpdate(prevProps) {
+    const { topic } = this.props.match.params;
+    if (prevProps.match.params.topic !== topic) {
+      this.fetchArticlesPerTopic(topic).then(articles => {
+        this.setState({ articlesByTopic: articles });
+      });
+    }
+  }
+  fetchArticlesPerTopic = topic => {
+    return axios
+      .get(`https://rosies-ncnews.herokuapp.com/api/topics/${topic}/articles`)
+      .then(({ data }) => {
+        return data.articles;
+      });
+  };
 }
 
 export default Topics;

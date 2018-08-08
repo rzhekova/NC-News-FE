@@ -1,33 +1,38 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Users extends Component {
   state = {
-    users: [
-      { id: 1, username: "user1", name: "Bill", avatar: "user1.jpg" },
-      { id: 2, username: "user2", name: "Jane", avatar: "user2.jpg" }
-    ]
+    user: {}
   };
   render() {
-    const { username } = this.props;
+    const { user } = this.state;
+    console.log(user);
+    console.log("rendering");
     return (
       <div>
-        <header>
-          <h2>{username}</h2>
-        </header>
-        {this.getUser(username)}
+        <section>
+          <h2>{user.name}</h2>
+          <img src={`${user.avatar_url}`} alt="" />
+        </section>
       </div>
     );
   }
 
+  componentDidMount() {
+    console.log("mounting");
+    const { username } = this.props.match.params;
+    this.getUser(username).then(user => {
+      this.setState({ user });
+    });
+  }
+
   getUser = username => {
-    const usersCopy = [...this.state.users];
-    const user = usersCopy.filter(user => user.username === username)[0];
-    return (
-      <main>
-        <p>Name: {user.name}</p>
-        <p>Picture: {user.avatar}</p>
-      </main>
-    );
+    return axios
+      .get(`https://rosies-ncnews.herokuapp.com/api/users/${username}`)
+      .then(({ data }) => {
+        return data;
+      });
   };
 }
 
