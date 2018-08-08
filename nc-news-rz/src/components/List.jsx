@@ -1,10 +1,10 @@
 import React from "react";
 
-const List = ({ list, property }) => {
+const List = ({ list, func }) => {
   return (
     <ul>
       {list.map(listItem => {
-        return <li key={listItem.id}>{listItem[property]}</li>;
+        return <li key={listItem._id}>{func(listItem)}</li>;
       })}
     </ul>
   );

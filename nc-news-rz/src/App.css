@@ -5,3 +5,29 @@
 .App-title {
   font-size: 1.5em;
 }
+
+li {
+  list-style-type: none;
+  margin: 35px 10px;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: 1px solid gray;
+}
+
+ul {
+  padding: 0;
+  width: 50vw;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+button {
+  margin: 6px 3px;
+  padding: 3px 5px;
+}

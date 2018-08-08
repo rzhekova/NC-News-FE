@@ -7,20 +7,15 @@ class Users extends Component {
   };
   render() {
     const { user } = this.state;
-    console.log(user);
-    console.log("rendering");
     return (
-      <div>
-        <section>
-          <h2>{user.name}</h2>
-          <img src={`${user.avatar_url}`} alt="" />
-        </section>
-      </div>
+      <section>
+        <h2>{user.name}</h2>
+        <img src={`${user.avatar_url}`} alt={`Avatar for ${user.name}`} />
+      </section>
     );
   }
 
   componentDidMount() {
-    console.log("mounting");
     const { username } = this.props.match.params;
     this.getUser(username).then(user => {
       this.setState({ user });

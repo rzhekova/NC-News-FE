@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Route, Link, Switch } from "react-router-dom";
-import HighestVotedArticlesList from "./HighestVotedArticlesList";
+import MostPopularArticlesList from "./MostPopularArticlesList";
 import AddArticle from "./AddArticle";
 import Topics from "./Topics";
 import Articles from "./Articles";
 import Users from "./Users";
 import axios from "axios";
 import Error404 from "./Error404";
-
+import Comments from "./Comments";
+import SingleArticle from "./SingleArticle";
 class Home extends Component {
   state = {
     articles: [],
@@ -16,23 +17,34 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <Link to="/"> Home</Link> <Link to="/articles"> Articles</Link>{" "}
-        <Link to="/topics/coding/articles">Coding</Link>{" "}
-        <Link to="/topics/football/articles">Football</Link>
-        <Link to="/topics/cooking/articles">Cooking</Link>
+        <nav>
+          <button>
+            <Link to="/"> Home</Link>
+          </button>
+          <button>
+            <Link to="/articles">Articles</Link>{" "}
+          </button>{" "}
+          / Topics:{" "}
+          {[...this.state.topics].map(topic => this.createTopicsLinks(topic))}
+        </nav>
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
           <Route path="/users/:username" component={Users} />
+          <Route path="/articles/:articleId" component={SingleArticle} />
           <Route
             path="/articles"
-            render={() => <Articles articles={this.state.articles} />}
+            render={() => <Articles articles={[...this.state.articles]} />}
           />
+          <Route path="/:articleId/comments" component={Comments} />
           <Route
             exact
             path="/"
             render={() => (
               <main>
-                <HighestVotedArticlesList articles={this.state.articles} />
+                <MostPopularArticlesList
+                  articles={[...this.state.articles]}
+                  func={this.formatPopularArticles}
+                />
                 <AddArticle />
               </main>
             )}
@@ -66,6 +78,21 @@ class Home extends Component {
       .then(({ data }) => {
         return data.topics;
       });
+  };
+
+  formatPopularArticles = articleObject => {
+    return articleObject.comments > 10 && articleObject.title;
+  };
+
+  createTopicsLinks = topicsObject => {
+    const { slug, title } = topicsObject;
+    return (
+      <span key={topicsObject._id}>
+        <button>
+          <Link to={`/topics/${slug}/articles`}>{title}</Link>
+        </button>
+      </span>
+    );
   };
 }
 
