@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class AddArticle extends Component {
+  state = {};
   render() {
     return (
       <form>

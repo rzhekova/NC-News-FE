@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import * as api from "../api";
 
 class SingleArticle extends Component {
   state = {
-    articleById: {}
+    articleById: {},
+    voteChange: 0
   };
 
   render() {
-    const { articleById } = this.state;
+    const { articleById, voteChange } = this.state;
     return (
       <article>
         {articleById.title && (
@@ -21,8 +22,18 @@ class SingleArticle extends Component {
               </Link>
             </p>
             {articleById.body}
-            <p>Votes: {articleById.votes}</p>
-            <p>Comments: {articleById.comments}</p>
+            <p>
+              <button onClick={() => this.handleVote("up")}>+</button>
+              {articleById.votes + voteChange}
+              <button onClick={() => this.handleVote("down")}>-</button>
+            </p>
+
+            <p>
+              Comments:{" "}
+              <Link to={`/${articleById._id}/comments`}>
+                {articleById.comments}
+              </Link>
+            </p>
           </section>
         )}
       </article>
@@ -31,20 +42,23 @@ class SingleArticle extends Component {
 
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    this.fetchArticlesById(articleId).then(article => {
+    api.fetchArticlesById(articleId).then(article => {
       this.setState({
         articleById: article
       });
     });
   }
 
-  fetchArticlesById = articleId => {
-    return axios
-      .get(`https://rosies-ncnews.herokuapp.com/api/articles/${articleId}`)
-      .then(({ data }) => {
-        return data.article;
-      });
+  handleVote = query => {
+    api.updateVoteCount(query, this.props.match.params.articleId, "articles");
+    this.setState({
+      voteChange:
+        query === "up"
+          ? this.state.voteChange + 1
+          : query === "down"
+            ? this.state.voteChange - 1
+            : this.state.voteChange
+    });
   };
 }
-
 export default SingleArticle;

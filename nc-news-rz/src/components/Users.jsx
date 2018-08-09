@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import * as api from "../api";
 
 class Users extends Component {
   state = {
@@ -17,18 +17,10 @@ class Users extends Component {
 
   componentDidMount() {
     const { username } = this.props.match.params;
-    this.getUser(username).then(user => {
+    api.fetchUser(username).then(user => {
       this.setState({ user });
     });
   }
-
-  getUser = username => {
-    return axios
-      .get(`https://rosies-ncnews.herokuapp.com/api/users/${username}`)
-      .then(({ data }) => {
-        return data;
-      });
-  };
 }
 
 export default Users;
