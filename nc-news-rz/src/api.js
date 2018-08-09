@@ -48,3 +48,19 @@ export const updateVoteCount = (query, id, endpoint) => {
       });
   }
 };
+
+export const addComment = (articleId, commentObject) => {
+  return axios
+    .post(`${URL}articles/${articleId}/comments`, commentObject)
+    .then(({ data }) => {
+      return data;
+    });
+};
+
+export const addArticle = (topicId, articleObject) => {
+  return axios
+    .post(`${URL}topics/${topicId}/articles`, articleObject)
+    .then(({ data }) => {
+      return data;
+    });
+};

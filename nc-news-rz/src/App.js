@@ -9,6 +9,7 @@ import Users from "./components/Users";
 import Error404 from "./components/Error404";
 import Comments from "./components/Comments";
 import SingleArticle from "./components/SingleArticle";
+import AddArticle from "./components/AddArticle";
 
 class App extends Component {
   state = {
@@ -24,16 +25,20 @@ class App extends Component {
           </button>
           <button>
             <Link to="/articles">Articles</Link>{" "}
+          </button>
+          <button>
+            <Link to="/addarticle">Add Article</Link>{" "}
           </button>{" "}
-          / Topics:{" "}
+          | Topics:{" "}
           {[...this.state.topics].map(topic => this.createTopicsLinks(topic))}
         </nav>
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
           <Route path="/users/:username" component={Users} />
           <Route path="/articles/:articleId" component={SingleArticle} />
-          <Route path="/articles" component={Articles} />
           <Route path="/:articleId/comments" component={Comments} />
+          <Route path="/articles" component={Articles} />
+          <Route path="/addarticle" component={AddArticle} />
           <Route exact path="/" component={Home} />
           <Route path="/*" component={Error404} />
         </Switch>

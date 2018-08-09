@@ -37,3 +37,27 @@ article {
   margin: 0 auto;
   text-align: justify;
 }
+
+input {
+  margin: 2%;
+}
+
+form {
+  width: 40vw;
+  margin: 0 auto;
+  padding-top: 10%;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.addComment {
+  width: 48vw;
+  margin: 2%;
+}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import List from "./List";
 import { Link } from "react-router-dom";
+import AddComment from "./AddComment";
 
 class Comments extends Component {
   state = {
@@ -13,7 +14,7 @@ class Comments extends Component {
     return (
       <div>
         <List list={comments} func={this.formatComments} />
-        <input type="text" placeholder="add a comment" />
+        <AddComment articleId={this.props.match.params.articleId} />
       </div>
     );
   }
@@ -51,19 +52,29 @@ class Comments extends Component {
           </p>
         </span>
         <button>Delete</button>
+        <hr />
       </main>
     );
   };
 
   handleVote = (query, commentId) => {
     api.updateVoteCount(query, commentId, "comments");
+    const comments = this.state.comments.map(comment => {
+      if (comment._id === commentId) {
+        console.log(comment);
+        return {
+          ...comment,
+          votes:
+            query === "up"
+              ? comment.votes + 1
+              : query === "down"
+                ? comment.votes - 1
+                : comment.votes
+        };
+      } else return comment;
+    });
     this.setState({
-      voteChange:
-        query === "up"
-          ? this.state.voteChange + 1
-          : query === "down"
-            ? this.state.voteChange - 1
-            : this.state.voteChange
+      comments
     });
   };
 }

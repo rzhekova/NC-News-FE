@@ -7,7 +7,15 @@ const AllArticles = ({ articles }) => {
       {articles.map(article => {
         return (
           <li key={article._id}>
-            <Link to={`/articles/${article._id}`}>{article.title} </Link>
+            <span>{article.votes} </span>
+            <Link to={`/articles/${article._id}`}>{article.title} </Link>{" "}
+            <p>
+              written by:{" "}
+              <Link to={`/users/${article.created_by.username}`}>
+                {" "}
+                {article.created_by.username}
+              </Link>
+            </p>
           </li>
         );
       })}
