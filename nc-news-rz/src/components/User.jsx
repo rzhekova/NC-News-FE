@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 
-class Users extends Component {
+class User extends Component {
   state = {
     user: {}
   };
@@ -23,4 +23,4 @@ class Users extends Component {
   }
 }
 
-export default Users;
+export default User;

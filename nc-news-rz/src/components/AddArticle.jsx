@@ -5,7 +5,8 @@ class AddArticle extends Component {
   state = {
     title: "",
     body: "",
-    topicId: ""
+    topic: "",
+    created_by: ""
   };
   render() {
     return (
@@ -22,13 +23,22 @@ class AddArticle extends Component {
           value={this.state.body}
           type="text"
         />
+        <select onChange={this.handleSelectUser}>
+          <option>Choose a username</option>
+          <option value="5b6c9b8531e69542532c5b0a">jessjelly</option>
+          <option value="5b6c9b8531e69542532c5b07">happyamy2016</option>
+          <option value="5b6c9b8531e69542532c5b06">grumpy19</option>
+          <option value="5b6c9b8531e69542532c5b08">cooljmessy</option>
+          <option value="5b6c9b8531e69542532c5b09">weegembump</option>
+          <option value="5b6c9b8531e69542532c5b05">tickle122</option>
+        </select>
         <select onChange={this.handleSelect}>
           <option>Choose a topic</option>
-          <option value="5b548c607eb1610ea6bf3fcb">Coding</option>
-          <option value="5b548c607eb1610ea6bf3fcc">Football</option>
-          <option value="5b548c607eb1610ea6bf3fcd">Cooking</option>
+          <option value="coding">Coding</option>
+          <option value="football">Football</option>
+          <option value="cooking">Cooking</option>
         </select>
-        <button type="submit">Submit</button>
+        <button>Submit</button>
       </form>
     );
   }
@@ -42,19 +52,21 @@ class AddArticle extends Component {
   };
 
   handleSelect = event => {
-    this.setState({ topicId: event.target.value });
+    this.setState({ topic: event.target.value });
   };
-
+  handleSelectUser = event => {
+    this.setState({ created_by: event.target.value });
+  };
   handleSubmit = event => {
     event.preventDefault();
-    const { title, body, topicId } = this.state;
-    if (title && body && topicId) {
-      const articleObject = { title, body };
-      api.addArticle(topicId, articleObject);
+    const { title, body, topic, created_by } = this.state;
+    if (title && body && topic) {
+      const articleObject = { title, body, created_by };
+      api.addArticle(topic, articleObject);
       this.setState({
         title: "",
         body: "",
-        topicId: ""
+        topic: ""
       });
     }
   };

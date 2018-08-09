@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import { Route, Switch, Link } from "react-router-dom";
 import Topics from "./components/Topics";
 import Articles from "./components/Articles";
-import Users from "./components/Users";
+import User from "./components/User";
 import Error404 from "./components/Error404";
 import Comments from "./components/Comments";
 import SingleArticle from "./components/SingleArticle";
@@ -34,7 +34,7 @@ class App extends Component {
         </nav>
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
-          <Route path="/users/:username" component={Users} />
+          <Route path="/users/:username" component={User} />
           <Route path="/articles/:articleId" component={SingleArticle} />
           <Route path="/:articleId/comments" component={Comments} />
           <Route path="/articles" component={Articles} />

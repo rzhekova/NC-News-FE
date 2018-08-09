@@ -57,10 +57,16 @@ export const addComment = (articleId, commentObject) => {
     });
 };
 
-export const addArticle = (topicId, articleObject) => {
+export const addArticle = (topic, articleObject) => {
   return axios
-    .post(`${URL}topics/${topicId}/articles`, articleObject)
+    .post(`${URL}topics/${topic}/articles`, articleObject)
     .then(({ data }) => {
       return data;
     });
+};
+
+export const deleteComment = commentId => {
+  return axios.delete(`${URL}comments/${commentId}`).then(({ data }) => {
+    return data;
+  });
 };

@@ -6,8 +6,7 @@ import AddComment from "./AddComment";
 
 class Comments extends Component {
   state = {
-    comments: [],
-    voteChange: 0
+    comments: []
   };
   render() {
     const { comments } = this.state;
@@ -29,7 +28,6 @@ class Comments extends Component {
   }
 
   formatComments = commentObject => {
-    const { voteChange } = this.state;
     return (
       <main>
         <p>"{commentObject.body}"</p>
@@ -45,13 +43,15 @@ class Comments extends Component {
             <button onClick={() => this.handleVote("up", commentObject._id)}>
               +
             </button>
-            {commentObject.votes + voteChange}
+            {commentObject.votes}
             <button onClick={() => this.handleVote("down", commentObject._id)}>
               -
             </button>
           </p>
         </span>
-        <button>Delete</button>
+        <button onClick={() => this.handleDelete(commentObject._id)}>
+          Delete
+        </button>
         <hr />
       </main>
     );
@@ -61,7 +61,6 @@ class Comments extends Component {
     api.updateVoteCount(query, commentId, "comments");
     const comments = this.state.comments.map(comment => {
       if (comment._id === commentId) {
-        console.log(comment);
         return {
           ...comment,
           votes:
@@ -76,6 +75,15 @@ class Comments extends Component {
     this.setState({
       comments
     });
+  };
+
+  handleDelete = commentId => {
+    const comments = this.state.comments.filter(comment => {
+      if (comment._id === commentId) {
+        return api.deleteComment(commentId);
+      } else return comment;
+    });
+    this.setState({ comments });
   };
 }
 
