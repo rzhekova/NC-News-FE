@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import * as utils from "../utils/utils";
 import AllArticles from "./AllArticles";
 
 class Articles extends Component {
@@ -15,7 +16,9 @@ class Articles extends Component {
     api.fetchAllArticles().then(allArticles => {
       let articles;
       if (this.props.func) {
-        articles = allArticles.filter(article => this.props.func(article));
+        articles = allArticles.filter(article =>
+          utils.formatPopularArticles(article)
+        );
       } else {
         articles = allArticles;
       }

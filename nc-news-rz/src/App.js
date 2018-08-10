@@ -27,10 +27,10 @@ class App extends Component {
             <Link to="/articles">Articles</Link>{" "}
           </button>
           <button>
-            <Link to="/addarticle">Add Article</Link>{" "}
+            <Link to="/add-article">Add Article</Link>{" "}
           </button>{" "}
           | Topics:{" "}
-          {[...this.state.topics].map(topic => this.createTopicsLinks(topic))}
+          {this.state.topics.map(topic => this.createTopicsLinks(topic))}
         </nav>
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
@@ -38,7 +38,10 @@ class App extends Component {
           <Route path="/articles/:articleId" component={SingleArticle} />
           <Route path="/:articleId/comments" component={Comments} />
           <Route path="/articles" component={Articles} />
-          <Route path="/addarticle" component={AddArticle} />
+          <Route
+            path="/add-article"
+            render={() => <AddArticle topics={this.state.topics} />}
+          />
           <Route exact path="/" component={Home} />
           <Route path="/*" component={Error404} />
         </Switch>

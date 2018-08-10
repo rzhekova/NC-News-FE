@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as api from "../api";
+import * as utils from "../utils/utils";
 
 class SingleArticle extends Component {
   state = {
@@ -15,6 +16,7 @@ class SingleArticle extends Component {
         {articleById.title && (
           <section>
             <h3>{articleById.title}</h3>
+            <p>date: {utils.formatDate(articleById.created_at)}</p>
             <p>
               by:{" "}
               <Link to={`/users/${articleById.created_by.username}`}>

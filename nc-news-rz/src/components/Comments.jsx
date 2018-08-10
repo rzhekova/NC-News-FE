@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import * as utils from "../utils/utils";
 import List from "./List";
 import { Link } from "react-router-dom";
 import AddComment from "./AddComment";
@@ -10,8 +11,10 @@ class Comments extends Component {
   };
   render() {
     const { comments } = this.state;
+    console.log(comments[0]);
     return (
       <div>
+        {comments[0] && <h3>Comments for "{comments[0].belongs_to.title}"</h3>}
         <List list={comments} func={this.formatComments} />
         <AddComment articleId={this.props.match.params.articleId} />
       </div>
@@ -31,6 +34,7 @@ class Comments extends Component {
     return (
       <main>
         <p>"{commentObject.body}"</p>
+        <p>date: {utils.formatDate(commentObject.created_at)}</p>
         <span>
           <p>
             posted by:{" "}

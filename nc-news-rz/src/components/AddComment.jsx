@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as api from "../api";
+import SelectUser from "./SelectUser";
 
 class AddComment extends Component {
   state = {
@@ -9,18 +10,10 @@ class AddComment extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <select onChange={this.handleSelect}>
-          <option>Choose a username</option>
-          <option value="5b6c9b8531e69542532c5b0a">jessjelly</option>
-          <option value="5b6c9b8531e69542532c5b07">happyamy2016</option>
-          <option value="5b6c9b8531e69542532c5b06">grumpy19</option>
-          <option value="5b6c9b8531e69542532c5b08">cooljmessy</option>
-          <option value="5b6c9b8531e69542532c5b09">weegembump</option>
-          <option value="5b6c9b8531e69542532c5b05">tickle122</option>
-        </select>
+        <SelectUser func={this.handleChange} />
         <input
           value={this.state.body}
-          onChange={this.handleInputChange}
+          onChange={event => this.handleChange(event.target.value, "body")}
           className="addComment"
           type="text"
           placeholder="add a comment"
@@ -29,12 +22,12 @@ class AddComment extends Component {
     );
   }
 
-  handleSelect = event => {
-    this.setState({ created_by: event.target.value });
+  handleChange = (value, key) => {
+    this.setState({ [key]: value });
   };
 
-  handleInputChange = event => {
-    this.setState({ body: event.target.value });
+  handleSelect = event => {
+    this.setState({ created_by: event.target.value });
   };
 
   handleSubmit = event => {
