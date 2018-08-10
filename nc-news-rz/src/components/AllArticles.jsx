@@ -9,7 +9,9 @@ const AllArticles = ({ articles }) => {
         return (
           <li key={article._id}>
             <span>{article.votes} </span>
-            <Link to={`/articles/${article._id}`}>{article.title} </Link> (
+            <Link to={`/articles/${article._id}`}>
+              {article.title}{" "}
+            </Link> (in{" "}
             <Link to={`/topics/${article.belongs_to}`}>
               {article.belongs_to}
             </Link>

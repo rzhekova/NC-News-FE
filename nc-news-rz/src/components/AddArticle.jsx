@@ -9,10 +9,12 @@ class AddArticle extends Component {
     body: "",
     topic: "",
     created_by: "",
+    isAdded: false,
     errorCode: null
   };
   render() {
-    const { topics, errorCode } = this.props;
+    const { topics } = this.props;
+    const { topic, errorCode, isAdded, title, body } = this.state;
     if (errorCode) {
       return (
         <Redirect
@@ -20,18 +22,21 @@ class AddArticle extends Component {
         />
       );
     }
+    if (isAdded) {
+      return <Redirect to={`topics/${topic}/articles`} />;
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         Title:
         <input
           onChange={event => this.handleChange(event.target.value, "title")}
-          value={this.state.title}
+          value={title}
           type="text"
         />
         Article:
         <textarea
           onChange={event => this.handleChange(event.target.value, "body")}
-          value={this.state.body}
+          value={body}
           type="text"
         />
         <SelectUser func={this.handleChange} />
@@ -60,12 +65,12 @@ class AddArticle extends Component {
     event.preventDefault();
     const { title, body, topic, created_by } = this.state;
     if (topic && topic && title && created_by) {
-      api.addArticle(topic, { title, body, created_by });
-      this.setState({
-        title: "",
-        body: "",
-        topic: ""
+      api.addArticle(topic, { title, body, created_by }).then(() => {
+        this.setState({
+          isAdded: true
+        });
       });
+      alert("Your article has been posted");
     } else {
       alert("Please fill in all the fields to post an article");
     }
