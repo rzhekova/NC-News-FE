@@ -1,16 +1,25 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import SelectUser from "./SelectUser";
+import { Redirect } from "react-router-dom";
 
 class AddArticle extends Component {
   state = {
     title: "",
     body: "",
     topic: "",
-    created_by: ""
+    created_by: "",
+    errorCode: null
   };
   render() {
-    const { topics } = this.props;
+    const { topics, errorCode } = this.props;
+    if (errorCode) {
+      return (
+        <Redirect
+          to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
+        />
+      );
+    }
     return (
       <form onSubmit={this.handleSubmit}>
         Title:
@@ -50,14 +59,15 @@ class AddArticle extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { title, body, topic, created_by } = this.state;
-    if (title && body && topic) {
-      const articleObject = { title, body, created_by };
-      api.addArticle(topic, articleObject);
+    if (topic && topic && title && created_by) {
+      api.addArticle(topic, { title, body, created_by });
       this.setState({
         title: "",
         body: "",
         topic: ""
       });
+    } else {
+      alert("Please fill in all the fields to post an article");
     }
   };
 }

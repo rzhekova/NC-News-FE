@@ -1,23 +1,37 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as api from "../api";
 import List from "./List";
 
 class Topics extends Component {
   state = {
-    articlesByTopic: []
+    articlesByTopic: [],
+    errorCode: null
   };
 
   render() {
-    const { articlesByTopic } = this.state;
+    const { articlesByTopic, errorCode } = this.state;
+    if (errorCode) {
+      return (
+        <Redirect
+          to={{
+            pathname: `/${errorCode}`,
+            state: { from: "articles" }
+          }}
+        />
+      );
+    }
     return <List list={articlesByTopic} func={this.formatArticleByTopic} />;
   }
 
   componentDidMount() {
     const { topic } = this.props.match.params;
-    api.fetchArticlesByTopic(topic).then(articles => {
-      this.setState({ articlesByTopic: articles });
-    });
+    api
+      .fetchArticlesByTopic(topic)
+      .then(articles => {
+        this.setState({ articlesByTopic: articles });
+      })
+      .catch(error => this.setState({ errorCode: error.response.status }));
   }
   componentDidUpdate(prevProps) {
     const { topic } = this.props.match.params;

@@ -9,8 +9,11 @@ const AllArticles = ({ articles }) => {
         return (
           <li key={article._id}>
             <span>{article.votes} </span>
-            <Link to={`/articles/${article._id}`}>{article.title} </Link>{" "}
-            <p>{utils.formatDate(article.created_at)}</p>
+            <Link to={`/articles/${article._id}`}>{article.title} </Link> (
+            <Link to={`/topics/${article.belongs_to}`}>
+              {article.belongs_to}
+            </Link>
+            )<p>{utils.formatDate(article.created_at)}</p>
             <p>
               written by:{" "}
               <Link to={`/users/${article.created_by.username}`}>

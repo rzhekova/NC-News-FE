@@ -7,6 +7,7 @@ import Topics from "./components/Topics";
 import Articles from "./components/Articles";
 import User from "./components/User";
 import Error404 from "./components/Error404";
+import Error400 from "./components/Error400";
 import Comments from "./components/Comments";
 import SingleArticle from "./components/SingleArticle";
 import AddArticle from "./components/AddArticle";
@@ -43,6 +44,7 @@ class App extends Component {
             render={() => <AddArticle topics={this.state.topics} />}
           />
           <Route exact path="/" component={Home} />
+          <Route path={"/400"} component={Error400} />
           <Route path="/*" component={Error404} />
         </Switch>
       </div>

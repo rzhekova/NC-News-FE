@@ -2,32 +2,44 @@ import React, { Component } from "react";
 import * as api from "../api";
 import * as utils from "../utils/utils";
 import List from "./List";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import AddComment from "./AddComment";
 
 class Comments extends Component {
   state = {
-    comments: []
+    comments: [],
+    errorCode: null
   };
   render() {
-    const { comments } = this.state;
-    console.log(comments[0]);
+    const { comments, errorCode } = this.state;
+    if (errorCode)
+      return (
+        <Redirect
+          to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
+        />
+      );
     return (
       <div>
         {comments[0] && <h3>Comments for "{comments[0].belongs_to.title}"</h3>}
         <List list={comments} func={this.formatComments} />
-        <AddComment articleId={this.props.match.params.articleId} />
+        <AddComment
+          articleId={this.props.match.params.articleId}
+          handleSubmit={this.handleSubmit}
+        />
       </div>
     );
   }
 
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    api.fetchCommentsByArticleId(articleId).then(comments => {
-      this.setState({
-        comments
-      });
-    });
+    api
+      .fetchCommentsByArticleId(articleId)
+      .then(comments => {
+        this.setState({
+          comments
+        });
+      })
+      .catch(error => this.setState({ errorCode: error.response.status }));
   }
 
   formatComments = commentObject => {
@@ -84,10 +96,24 @@ class Comments extends Component {
   handleDelete = commentId => {
     const comments = this.state.comments.filter(comment => {
       if (comment._id === commentId) {
-        return api.deleteComment(commentId);
+        api.deleteComment(commentId);
+        return false;
       } else return comment;
     });
     this.setState({ comments });
+  };
+
+  handleSubmit = (event, created_by, body) => {
+    event.preventDefault();
+    if (created_by && body) {
+      api
+        .addComment(this.props.match.params.articleId, { created_by, body })
+        .then(comment => {
+          this.setState({ comments: [...this.state.comments, comment] });
+        });
+    } else {
+      alert("Please fill in all the fields to post a comment");
+    }
   };
 }
 

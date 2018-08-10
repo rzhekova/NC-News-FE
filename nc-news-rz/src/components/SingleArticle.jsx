@@ -1,16 +1,24 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as api from "../api";
 import * as utils from "../utils/utils";
 
 class SingleArticle extends Component {
   state = {
     articleById: {},
-    voteChange: 0
+    voteChange: 0,
+    errorCode: null
   };
 
   render() {
-    const { articleById, voteChange } = this.state;
+    const { articleById, voteChange, errorCode } = this.state;
+    if (errorCode) {
+      return (
+        <Redirect
+          to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
+        />
+      );
+    }
     return (
       <article>
         {articleById.title && (
@@ -44,11 +52,16 @@ class SingleArticle extends Component {
 
   componentDidMount() {
     const { articleId } = this.props.match.params;
-    api.fetchArticlesById(articleId).then(article => {
-      this.setState({
-        articleById: article
+    api
+      .fetchArticlesById(articleId)
+      .then(article => {
+        this.setState({
+          articleById: article
+        });
+      })
+      .catch(error => {
+        this.setState({ errorCode: error.response.status });
       });
-    });
   }
 
   handleVote = query => {

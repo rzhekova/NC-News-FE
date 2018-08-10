@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as api from "../api";
 import SelectUser from "./SelectUser";
 
 class AddComment extends Component {
@@ -9,7 +8,11 @@ class AddComment extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form
+        onSubmit={event =>
+          this.props.handleSubmit(event, this.state.created_by, this.state.body)
+        }
+      >
         <SelectUser func={this.handleChange} />
         <input
           value={this.state.body}
@@ -24,21 +27,6 @@ class AddComment extends Component {
 
   handleChange = (value, key) => {
     this.setState({ [key]: value });
-  };
-
-  handleSelect = event => {
-    this.setState({ created_by: event.target.value });
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    if (this.state.body && this.state.created_by) {
-      api.addComment(this.props.articleId, this.state);
-      this.setState({
-        created_by: "",
-        body: ""
-      });
-    }
   };
 }
 
