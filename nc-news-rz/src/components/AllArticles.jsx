@@ -7,15 +7,14 @@ const AllArticles = ({ articles }) => {
     <ul>
       {articles.map(article => {
         return (
-          <li key={article._id}>
+          <li className="article" key={article._id}>
             <span>{article.votes} </span>
-            <Link to={`/articles/${article._id}`}>
-              {article.title}{" "}
-            </Link> (in{" "}
-            <Link to={`/topics/${article.belongs_to}`}>
-              {article.belongs_to}
-            </Link>
-            )<p>{utils.formatDate(article.created_at)}</p>
+            <Link to={`/articles/${article._id}`}>{article.title} </Link>
+            <span>
+              <Link to={`/topics/${article.belongs_to}`}>
+                {article.belongs_to}
+              </Link>
+            </span>
             <p>
               written by:{" "}
               <Link to={`/users/${article.created_by.username}`}>
@@ -23,6 +22,7 @@ const AllArticles = ({ articles }) => {
                 {article.created_by.username}
               </Link>
             </p>
+            <p>{utils.formatDate(article.created_at)}</p>
           </li>
         );
       })}

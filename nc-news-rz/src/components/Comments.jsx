@@ -46,7 +46,7 @@ class Comments extends Component {
     return (
       <main>
         <p>"{commentObject.body}"</p>
-        <p>date: {utils.formatDate(commentObject.created_at)}</p>
+        <p>{utils.formatDate(commentObject.created_at)}</p>
         <span>
           <p>
             posted by:{" "}
@@ -68,7 +68,6 @@ class Comments extends Component {
         <button onClick={() => this.handleDelete(commentObject._id)}>
           Delete
         </button>
-        <hr />
       </main>
     );
   };

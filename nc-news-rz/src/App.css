@@ -1,3 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+@import url("https://fonts.googleapis.com/css?family=Poller+One");
+/* @import url("https://fonts.googleapis.com/css?family=Vast+Shadow");
+@import url("https://fonts.googleapis.com/css?family=Bungee+Shade");
+@import url("https://fonts.googleapis.com/css?family=Sonsie+One"); */
+
 .App {
   text-align: center;
 }
@@ -6,18 +12,70 @@
   font-size: 1.5em;
 }
 
+nav,
+.title {
+  font-family: "Poller One", cursive;
+}
+
+nav {
+  background-color: black;
+  padding: 10px;
+  height: 8vh;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  font-size: 30px;
+  color: white;
+}
+body {
+  margin: 0;
+  padding-top: 16vh;
+  padding-bottom: 16vh;
+}
+
+body,
+a {
+  font-family: "Raleway", sans-serif;
+}
+
 li {
+  border: 1px solid lightblue;
+  padding: 7%;
   list-style-type: none;
-  margin: 35px 10px;
+  margin: 10px 10px;
 }
 
 a {
+  font-weight: bolder;
   text-decoration: none;
+  color: black;
+}
+
+button > a {
+  font-size: 16px;
+  color: white;
+}
+
+span > a {
+  color: grey;
+  font-style: italic;
+  margin-left: 2%;
+  font-size: 14px;
 }
 
 button {
   background: none;
-  border: 1px solid gray;
+  border: 1px solid black;
+  margin: 6px 7px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 ul {
@@ -27,25 +85,17 @@ ul {
   text-align: justify;
 }
 
-button {
-  margin: 6px 3px;
-  padding: 3px 5px;
-}
-
 article {
   width: 50vw;
+  padding-top: 10vh;
   margin: 0 auto;
   text-align: justify;
 }
 
-input {
-  margin: 2%;
-}
-
 form {
-  width: 40vw;
+  max-width: 40vw;
   margin: 0 auto;
-  padding-top: 10%;
+  padding: 2%;
   text-align: start;
   display: flex;
   flex-direction: column;
@@ -53,11 +103,34 @@ form {
 
 input,
 textarea {
-  width: 100%;
-  margin: 0 auto;
+  margin: 2% 0;
 }
 
-.addComment {
-  width: 48vw;
-  margin: 2%;
+textarea {
+  height: 150px;
+}
+
+section.user {
+  padding-top: 10vh;
+}
+
+select {
+  width: 20vw;
+  margin: 2% 0;
+  background-color: white;
+}
+
+.submit {
+  width: 100px;
+  justify-self: end;
+}
+
+.error > a {
+  color: black;
+}
+
+@media all and (max-width: 800px) {
+  ul {
+    width: 70vw;
+  }
 }

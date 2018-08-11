@@ -24,7 +24,7 @@ class SingleArticle extends Component {
         {articleById.title && (
           <section>
             <h3>{articleById.title}</h3>
-            <p>date: {utils.formatDate(articleById.created_at)}</p>
+            <p>{utils.formatDate(articleById.created_at)}</p>
             <p>
               by:{" "}
               <Link to={`/users/${articleById.created_by.username}`}>

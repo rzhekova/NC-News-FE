@@ -33,13 +33,9 @@ class AddArticle extends Component {
           value={title}
           type="text"
         />
-        Article:
-        <textarea
-          onChange={event => this.handleChange(event.target.value, "body")}
-          value={body}
-          type="text"
-        />
+        Username:
         <SelectUser func={this.handleChange} />
+        Topic:
         <select
           onChange={event => this.handleChange(event.target.value, "topic")}
         >
@@ -52,7 +48,13 @@ class AddArticle extends Component {
             );
           })}
         </select>
-        <button>Submit</button>
+        Article:
+        <textarea
+          onChange={event => this.handleChange(event.target.value, "body")}
+          value={body}
+          type="text"
+        />
+        <button className="submit">Submit</button>
       </form>
     );
   }

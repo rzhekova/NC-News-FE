@@ -7,6 +7,7 @@ class User extends Component {
     user: {},
     errorCode: null
   };
+
   render() {
     const { user, errorCode } = this.state;
     if (errorCode)
@@ -17,7 +18,7 @@ class User extends Component {
       );
     else
       return (
-        <section>
+        <section className="user">
           <h2>{user.name}</h2>
           <p>username: {user.username}</p>
           <img

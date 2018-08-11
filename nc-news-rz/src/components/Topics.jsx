@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import * as api from "../api";
+import * as utils from "../utils/utils";
 import List from "./List";
 
 class Topics extends Component {
@@ -21,7 +22,7 @@ class Topics extends Component {
         />
       );
     }
-    return <List list={articlesByTopic} func={this.formatArticleByTopic} />;
+    return <List list={articlesByTopic} func={utils.formatArticleByTopic} />;
   }
 
   componentDidMount() {
@@ -41,12 +42,6 @@ class Topics extends Component {
       });
     }
   }
-
-  formatArticleByTopic = articleOject => {
-    return (
-      <Link to={`/articles/${articleOject._id}`}>{articleOject.title}</Link>
-    );
-  };
 }
 
 export default Topics;

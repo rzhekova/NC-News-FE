@@ -7,7 +7,7 @@ const Error400 = props => {
     <div>
       <h4>There are no {props.location.state.from} here</h4>
       {props.location.state.from && (
-        <button>
+        <button className="error">
           <Link to={`/articles`}>Back to articles</Link>
         </button>
       )}

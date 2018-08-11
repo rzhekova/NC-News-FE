@@ -6,7 +6,7 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <h3>Our most commented on articles:</h3>
+        <h3>MOST POPULAR ARTICLES</h3>
         <Articles func={utils.formatPopularArticles} />
       </div>
     );

@@ -5,7 +5,7 @@ const Error404 = props => {
   return (
     <div>
       <h3>404 - Page not found</h3>
-      <button>
+      <button className="error">
         <Link to={props.location.state ? `/${props.location.state.from}` : "/"}>
           Back to {props.location.state ? "articles" : "home"}
         </Link>

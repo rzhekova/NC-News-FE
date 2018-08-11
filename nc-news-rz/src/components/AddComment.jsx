@@ -8,25 +8,31 @@ class AddComment extends Component {
   };
   render() {
     return (
-      <form
-        onSubmit={event =>
-          this.props.handleSubmit(event, this.state.created_by, this.state.body)
-        }
-      >
+      <form onSubmit={this.handleAddArticle}>
+        Username:
         <SelectUser func={this.handleChange} />
-        <input
+        Comment:
+        <textarea
           value={this.state.body}
           onChange={event => this.handleChange(event.target.value, "body")}
-          className="addComment"
           type="text"
-          placeholder="add a comment"
         />
+        <button className="submit">Submit</button>
       </form>
     );
   }
 
   handleChange = (value, key) => {
     this.setState({ [key]: value });
+  };
+
+  handleAddArticle = event => {
+    const { created_by, body } = this.state;
+    this.props.handleSubmit(event, created_by, body);
+    this.setState({
+      created_by: "",
+      body: ""
+    });
   };
 }
 

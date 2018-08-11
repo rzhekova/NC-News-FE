@@ -21,17 +21,21 @@ class App extends Component {
     return (
       <div className="App">
         <nav>
-          <button>
-            <Link to="/"> Home</Link>
-          </button>
-          <button>
-            <Link to="/articles">Articles</Link>{" "}
-          </button>
-          <button>
-            <Link to="/add-article">Add Article</Link>{" "}
-          </button>{" "}
-          | Topics:{" "}
-          {this.state.topics.map(topic => this.createTopicsLinks(topic))}
+          <Link to="/">
+            <span className="title">NC NEWS </span>
+          </Link>
+
+          <section>
+            <button>
+              <Link to="/articles">All Articles</Link>{" "}
+            </button>
+            <button>
+              <Link to="/add-article">Add Article</Link>{" "}
+            </button>
+            {"  "}
+            Topics:{" "}
+            {this.state.topics.map(topic => this.createTopicsLinks(topic))}
+          </section>
         </nav>
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
@@ -62,7 +66,7 @@ class App extends Component {
     return (
       <span key={topicsObject._id}>
         <button>
-          <Link to={`/topics/${slug}/articles`}>{title}</Link>
+          <Link to={`/topics/${slug}/articles`}>{title.toUpperCase()}</Link>
         </button>
       </span>
     );

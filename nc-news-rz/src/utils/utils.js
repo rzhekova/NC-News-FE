@@ -29,3 +29,7 @@ export const formatPopularArticles = articleObject => {
     )
   );
 };
+
+export const formatArticleByTopic = articleOject => {
+  return <Link to={`/articles/${articleOject._id}`}>{articleOject.title}</Link>;
+};
