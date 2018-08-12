@@ -22,7 +22,7 @@ class App extends Component {
       <div className="App">
         <nav className="laptop">
           <Link to="/">
-            <span className="title">NC NEWS </span>
+            <span className="title">Northcoders NEWS </span>
           </Link>
           <section id="nav">
             <span>
@@ -30,9 +30,10 @@ class App extends Component {
                 <Link to="/articles">All Articles</Link>
               </button>
               <button>
-                <Link to="/add-article">Add Article</Link>
+                <Link to="/add-article">Add Content</Link>
               </button>
             </span>
+            {" | "}
             Topics:
             {this.state.topics.map(topic => this.createTopicsLinks(topic))}
           </section>
@@ -40,14 +41,15 @@ class App extends Component {
             <i className="fas fa-bars" />
           </label>
           <input type="checkbox" id="show-menu" role="button" />
-          <div id="menu">
+
+          <div id="mobile">
             <button>
               <Link to="/articles">All Articles</Link>
             </button>
             <button>
               <Link to="/add-article">Add Article</Link>
             </button>
-            Topics:
+            <p style={{ textDecoration: "underline" }}>Topics:</p>
             {this.state.topics.map(topic => this.createTopicsLinks(topic))}
           </div>
         </nav>
@@ -66,6 +68,12 @@ class App extends Component {
           <Route path={"/400"} component={Error400} />
           <Route path="/*" component={Error404} />
         </Switch>
+        <footer>
+          <p>
+            <i>coded by </i>
+            Rosie Zhekova
+          </p>
+        </footer>
       </div>
     );
   }

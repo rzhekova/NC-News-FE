@@ -12,6 +12,7 @@ class Topics extends Component {
   };
 
   render() {
+    const { topic } = this.props.match.params;
     const { articlesByTopic, errorCode } = this.state;
     if (errorCode)
       return (
@@ -25,6 +26,7 @@ class Topics extends Component {
     else
       return (
         <div className="white-background">
+          <h2>{topic.toUpperCase()}</h2>
           <List list={articlesByTopic} func={utils.formatArticleByTopic} />
         </div>
       );

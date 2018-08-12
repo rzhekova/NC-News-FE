@@ -18,7 +18,10 @@ class Articles extends Component {
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
         />
       );
-    else return <AllArticles articles={this.state.articles} />;
+    else
+      return (
+        <AllArticles title={this.props.title} articles={this.state.articles} />
+      );
   }
 
   componentDidMount() {
@@ -41,7 +44,8 @@ class Articles extends Component {
 }
 
 Articles.propTypes = {
-  func: PT.func
+  func: PT.func,
+  title: PT.string
 };
 
 export default Articles;

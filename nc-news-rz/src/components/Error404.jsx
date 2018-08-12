@@ -4,9 +4,9 @@ import PT from "prop-types";
 
 const Error404 = props => {
   return (
-    <div>
+    <div className="white-background">
       <h3>404 - Page not found</h3>
-      <button className="error">
+      <button style={{ border: "1px solid black" }} className="error">
         <Link to={props.location.state ? `/${props.location.state.from}` : "/"}>
           Back to {props.location.state ? "articles" : "home"}
         </Link>

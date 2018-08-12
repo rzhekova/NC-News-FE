@@ -27,6 +27,7 @@ class Comments extends Component {
             <h4>Comments for "{comments[0].belongs_to.title}"</h4>
           )}
           <List list={comments} func={this.formatComments} />
+          <h3>Join the conversation</h3>
           <AddComment handleSubmit={this.handleSubmit} />
         </div>
       );
@@ -59,8 +60,8 @@ class Comments extends Component {
             </Link>
           </p>
           <p>
-            votes:{" "}
             <button
+              className="vote-up"
               disabled={this.state.isDisabled}
               onClick={() => this.handleVote("up", commentObject._id)}
             >
@@ -75,7 +76,10 @@ class Comments extends Component {
             </button>
           </p>
         </span>
-        <button onClick={() => this.handleDelete(commentObject._id)}>
+        <button
+          style={{ border: "1px solid rgb(167, 167, 167)", marginLeft: "0" }}
+          onClick={() => this.handleDelete(commentObject._id)}
+        >
           Delete
         </button>
         <hr />

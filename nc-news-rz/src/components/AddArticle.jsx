@@ -27,7 +27,8 @@ class AddArticle extends Component {
       return <Redirect to={`topics/${topic}/articles`} />;
     } else
       return (
-        <div className="white-background">
+        <div style={{ height: "68vh" }} className="white-background">
+          <h2>Post an article</h2>
           <form onSubmit={this.handleSubmit}>
             Title:
             <input
@@ -50,7 +51,7 @@ class AddArticle extends Component {
                 );
               })}
             </select>
-            Article:
+            Text:
             <textarea
               onChange={event => this.handleChange(event.target.value, "body")}
               value={body}

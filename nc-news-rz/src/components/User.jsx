@@ -19,7 +19,7 @@ class User extends Component {
       );
     else
       return (
-        <section className="user">
+        <section className="white-background">
           <h2>{user.name}</h2>
           <p>username: {user.username}</p>
           <img

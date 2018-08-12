@@ -5,34 +5,60 @@
   height: 100%;
 }
 .white-background {
+  border: 1px solid lightgray;
   background-color: white;
   margin: 0 auto;
   width: 60vw;
-  padding: 50vh;
   padding-top: 16vh;
   padding-bottom: 16vh;
   padding-left: 5vw;
   padding-right: 5vw;
 }
 
-article.white-background {
+article.white-background > div {
   text-align: justify;
+  width: 50vw;
+  margin: 0 auto;
+  margin-top: 5vh;
+}
+h2 {
+  margin-bottom: 5vh;
 }
 
 hr {
   margin-top: 3vh;
   border: 0;
-  color: lightblue;
-  background-color: lightblue;
+  color: lightgray;
+  background-color: lightgray;
   height: 1px;
 }
-nav.laptop,
-.title {
+
+.title,
+nav a {
   font-family: "Poller One", cursive;
 }
 
-nav.laptop {
-  background-color: #202020;
+nav a,
+footer {
+  font-weight: lighter;
+}
+
+footer,
+nav,
+input[type="checkbox"]:checked ~ #mobile {
+  background-color: #0a5a5e;
+}
+footer {
+  height: 5vh;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: white;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+nav {
   padding: 10px;
   height: 8vh;
   position: fixed;
@@ -40,13 +66,13 @@ nav.laptop {
   top: 0;
   color: white;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 .show-menu {
+  background: none;
   text-decoration: none;
   color: #fff;
-  background: black;
   text-align: center;
   padding: 10px 0;
   display: none;
@@ -56,7 +82,7 @@ input[type="checkbox"] {
   display: none;
 }
 
-#menu {
+#mobile {
   display: none;
 }
 
@@ -75,8 +101,7 @@ body {
   margin: 0;
 }
 
-body,
-a {
+body {
   font-family: "Raleway", sans-serif;
 }
 
@@ -93,7 +118,7 @@ li {
 }
 
 li.article {
-  border: 1px solid rgb(179, 43, 43);
+  border: 1px solid rgb(206, 47, 89);
   padding: 7%;
   list-style-type: none;
   margin: 10px 10px;
@@ -102,6 +127,11 @@ li.article {
 button > a {
   font-size: 16px;
   color: white;
+}
+
+.vote-up {
+  margin-left: 0;
+  padding-left: 2px;
 }
 
 span > a {
@@ -123,16 +153,18 @@ span.votes {
 
 .fa-arrow-up {
   color: darkgreen;
+  padding: 1%;
+  margin: 0;
 }
 
-.fa-arrow-down {
+button i.fa-arrow-down {
   color: darkred;
 }
 
 button {
   background: none;
-  border: 1px solid black;
-  margin: 6px 7px;
+  border: none;
+  margin: 0 6px;
   padding: 5px 10px;
   cursor: pointer;
 }
@@ -142,6 +174,10 @@ ul {
   width: 50vw;
   margin: 0 auto;
   text-align: justify;
+}
+
+img {
+  width: 10vw;
 }
 
 form {
@@ -174,6 +210,7 @@ select {
 
 .submit {
   width: 100px;
+  border: 1px solid rgb(167, 167, 167);
   margin-left: 0;
 }
 
@@ -182,6 +219,12 @@ select {
 }
 
 @media all and (max-width: 900px) {
+  .white-background {
+    background-color: white;
+    margin: 0 auto;
+    width: 70vw;
+  }
+
   ul,
   article {
     width: 70vw;
@@ -194,61 +237,91 @@ select {
     margin-left: 20px;
     margin-right: 20px;
   }
+
+  img {
+    width: 20vw;
+  }
   /* nav bar */
   #nav {
     display: none;
   }
 
   nav.laptop {
-    justify-content: space-around;
+    justify-content: space-between;
+  }
+
+  label.show-menu {
+    margin-right: 4vw;
+    font-size: 25px;
+  }
+
+  span.title {
+    margin-left: 4vw;
   }
 
   .show-menu {
     display: inline-block;
-    width: 5vw;
+    width: 10vw;
   }
 
-  input[type="checkbox"]:not(:checked) ~ #menu {
-    display: none;
-  }
-  input[type="checkbox"]:checked ~ #menu {
+  input[type="checkbox"]:checked ~ #mobile {
     display: flex;
     flex-direction: column;
-    background-color: black;
     width: 35vw;
     position: inherit;
     top: 0;
     right: 0;
     margin-top: 10vh;
   }
-  div#menu button {
-    width: 90%;
-    padding: 4%;
+  div#mobile button {
+    width: 100%;
+    padding: 10% 0;
     margin: 0 auto;
-    margin-bottom: 2%;
-    margin-top: 2%;
   }
 
-  div#menu button:hover {
-    border: 1px solid grey;
+  div#mobile button:hover {
+    background-color: #0f5f5f;
   }
 }
 
 @media all and (max-width: 600px) {
+  .white-background {
+    background-color: white;
+    margin: 0 auto;
+    width: 70vw;
+  }
+
+  .title,
+  .title:hover {
+    font-size: 18px;
+  }
+
+  label.show-menu {
+    margin-right: 8vw;
+    font-size: 25px;
+  }
   article {
     padding-top: 1vh;
   }
-  input[type="checkbox"]:checked ~ #menu {
+
+  input[type="checkbox"]:checked ~ #mobile {
     width: 50vw;
   }
   ul,
   article {
-    width: 80vw;
-  }
-  form {
     width: 70vw;
   }
-  select {
+  form {
+    width: 65vw;
+  }
+  select,
+  img {
     width: 40vw;
+  }
+  footer {
+    font-size: 11px;
+  }
+  li.article {
+    font-size: 14px;
   }
 }

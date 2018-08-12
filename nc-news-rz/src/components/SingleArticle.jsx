@@ -8,7 +8,6 @@ class SingleArticle extends Component {
   state = {
     articleById: {},
     voteChange: 0,
-    isDisabled: false,
     errorCode: null
   };
 
@@ -36,16 +35,13 @@ class SingleArticle extends Component {
               {articleById.body}
               <p>
                 <button
-                  disabled={this.state.isDisabled}
+                  className="vote-up"
                   onClick={() => this.handleVote("up")}
                 >
                   <i className="fas fa-arrow-up" />
                 </button>
                 {articleById.votes + voteChange}
-                <button
-                  disabled={this.state.isDisabled}
-                  onClick={() => this.handleVote("down")}
-                >
+                <button onClick={() => this.handleVote("down")}>
                   <i className="fas fa-arrow-down" />
                 </button>
               </p>
@@ -80,7 +76,6 @@ class SingleArticle extends Component {
     const { articleId } = this.props.match.params;
     api.updateVoteCount(query, articleId, "articles");
     this.setState({
-      isDisabled: true,
       voteChange:
         query === "up"
           ? this.state.voteChange + 1
