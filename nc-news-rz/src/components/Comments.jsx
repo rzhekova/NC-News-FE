@@ -22,9 +22,9 @@ class Comments extends Component {
       );
     else
       return (
-        <div>
+        <div className="white-background">
           {comments[0] && (
-            <h3>Comments for "{comments[0].belongs_to.title}"</h3>
+            <h4>Comments for "{comments[0].belongs_to.title}"</h4>
           )}
           <List list={comments} func={this.formatComments} />
           <AddComment handleSubmit={this.handleSubmit} />
@@ -47,7 +47,9 @@ class Comments extends Component {
   formatComments = commentObject => {
     return (
       <main>
-        <p>"{commentObject.body}"</p>
+        <p>
+          "<i>{commentObject.body}</i>"
+        </p>
         <p>{utils.formatDate(commentObject.created_at)}</p>
         <span>
           <p>
@@ -62,14 +64,14 @@ class Comments extends Component {
               disabled={this.state.isDisabled}
               onClick={() => this.handleVote("up", commentObject._id)}
             >
-              +
+              <i className="fas fa-arrow-up" />
             </button>
             {commentObject.votes}
             <button
               disabled={this.state.isDisabled}
               onClick={() => this.handleVote("down", commentObject._id)}
             >
-              -
+              <i className="fas fa-arrow-down" />
             </button>
           </p>
         </span>
@@ -82,9 +84,11 @@ class Comments extends Component {
   };
 
   handleVote = (query, commentId) => {
+    let isDisabled;
     api.updateVoteCount(query, commentId, "comments");
     const comments = this.state.comments.map(comment => {
       if (comment._id === commentId) {
+        isDisabled = true;
         return {
           ...comment,
           votes:
@@ -94,11 +98,14 @@ class Comments extends Component {
                 ? comment.votes - 1
                 : comment.votes
         };
-      } else return comment;
+      } else {
+        isDisabled = false;
+        return comment;
+      }
     });
     this.setState({
       comments,
-      isDisabled: true
+      isDisabled
     });
   };
 

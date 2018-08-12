@@ -9,7 +9,7 @@ const AllArticles = ({ articles }) => {
       {articles.map(article => {
         return (
           <li className="article" key={article._id}>
-            <span>{article.votes} </span>
+            <span className="votes">{article.votes}</span>
             <Link to={`/articles/${article._id}`}>{article.title} </Link>
             <span>
               <Link to={`/topics/${article.belongs_to}`}>

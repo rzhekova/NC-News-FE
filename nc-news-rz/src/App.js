@@ -20,23 +20,38 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        <nav className="laptop">
           <Link to="/">
             <span className="title">NC NEWS </span>
           </Link>
-
-          <section>
-            <button>
-              <Link to="/articles">All Articles</Link>{" "}
-            </button>
-            <button>
-              <Link to="/add-article">Add Article</Link>{" "}
-            </button>
-            {"  "}
-            Topics:{" "}
+          <section id="nav">
+            <span>
+              <button>
+                <Link to="/articles">All Articles</Link>
+              </button>
+              <button>
+                <Link to="/add-article">Add Article</Link>
+              </button>
+            </span>
+            Topics:
             {this.state.topics.map(topic => this.createTopicsLinks(topic))}
           </section>
+          <label htmlFor="show-menu" className="show-menu">
+            <i className="fas fa-bars" />
+          </label>
+          <input type="checkbox" id="show-menu" role="button" />
+          <div id="menu">
+            <button>
+              <Link to="/articles">All Articles</Link>
+            </button>
+            <button>
+              <Link to="/add-article">Add Article</Link>
+            </button>
+            Topics:
+            {this.state.topics.map(topic => this.createTopicsLinks(topic))}
+          </div>
         </nav>
+
         <Switch>
           <Route path="/topics/:topic" component={Topics} />
           <Route path="/users/:username" component={User} />

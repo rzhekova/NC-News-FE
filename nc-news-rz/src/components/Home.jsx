@@ -5,7 +5,7 @@ import * as utils from "../utils/utils";
 class Home extends Component {
   render() {
     return (
-      <div className="App">
+      <div className="white-background">
         <h3>MOST POPULAR ARTICLES</h3>
         <Articles func={utils.formatPopularArticles} />
       </div>

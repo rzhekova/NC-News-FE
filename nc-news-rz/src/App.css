@@ -2,11 +2,23 @@
 
 .App {
   text-align: center;
+  height: 100%;
+}
+.white-background {
+  background-color: white;
+  margin: 0 auto;
+  width: 60vw;
+  padding: 50vh;
+  padding-top: 16vh;
+  padding-bottom: 16vh;
+  padding-left: 5vw;
+  padding-right: 5vw;
 }
 
-.App-title {
-  font-size: 1.5em;
+article.white-background {
+  text-align: justify;
 }
+
 hr {
   margin-top: 3vh;
   border: 0;
@@ -14,13 +26,13 @@ hr {
   background-color: lightblue;
   height: 1px;
 }
-nav,
+nav.laptop,
 .title {
   font-family: "Poller One", cursive;
 }
 
-nav {
-  background-color: black;
+nav.laptop {
+  background-color: #202020;
   padding: 10px;
   height: 8vh;
   position: fixed;
@@ -31,6 +43,22 @@ nav {
   justify-content: space-around;
   align-items: center;
 }
+.show-menu {
+  text-decoration: none;
+  color: #fff;
+  background: black;
+  text-align: center;
+  padding: 10px 0;
+  display: none;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+#menu {
+  display: none;
+}
 
 .title {
   font-size: 30px;
@@ -39,19 +67,23 @@ nav {
 }
 
 .title:hover {
-  font-size: 35px;
-  color: lightblue;
+  font-size: 31px;
 }
 
 body {
+  background-color: ghostwhite;
   margin: 0;
-  padding-top: 16vh;
-  padding-bottom: 16vh;
 }
 
 body,
 a {
   font-family: "Raleway", sans-serif;
+}
+
+a {
+  font-weight: bolder;
+  text-decoration: none;
+  color: black;
 }
 
 li {
@@ -61,16 +93,10 @@ li {
 }
 
 li.article {
-  border: 1px solid lightblue;
+  border: 1px solid rgb(179, 43, 43);
   padding: 7%;
   list-style-type: none;
   margin: 10px 10px;
-}
-
-a {
-  font-weight: bolder;
-  text-decoration: none;
-  color: black;
 }
 
 button > a {
@@ -83,6 +109,24 @@ span > a {
   font-style: italic;
   margin-left: 2%;
   font-size: 14px;
+}
+
+span.votes {
+  background-color: black;
+  color: white;
+  font-weight: bolder;
+  border: 0.3vw solid black;
+  padding-left: 2px;
+  padding-right: 3px;
+  margin-right: 6px;
+}
+
+.fa-arrow-up {
+  color: darkgreen;
+}
+
+.fa-arrow-down {
+  color: darkred;
 }
 
 button {
@@ -100,15 +144,8 @@ ul {
   text-align: justify;
 }
 
-article {
-  width: 50vw;
-  padding-top: 10vh;
-  margin: 0 auto;
-  text-align: justify;
-}
-
 form {
-  max-width: 40vw;
+  width: 30vw;
   margin: 0 auto;
   padding: 2%;
   text-align: start;
@@ -130,22 +167,88 @@ section.user {
 }
 
 select {
-  width: 20vw;
+  width: 15vw;
   margin: 2% 0;
   background-color: white;
 }
 
 .submit {
   width: 100px;
-  justify-self: end;
+  margin-left: 0;
 }
 
 .error > a {
   color: black;
 }
 
-@media all and (max-width: 800px) {
-  ul {
+@media all and (max-width: 900px) {
+  ul,
+  article {
     width: 70vw;
+  }
+
+  form {
+    width: 60vw;
+  }
+  h4 {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  /* nav bar */
+  #nav {
+    display: none;
+  }
+
+  nav.laptop {
+    justify-content: space-around;
+  }
+
+  .show-menu {
+    display: inline-block;
+    width: 5vw;
+  }
+
+  input[type="checkbox"]:not(:checked) ~ #menu {
+    display: none;
+  }
+  input[type="checkbox"]:checked ~ #menu {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    width: 35vw;
+    position: inherit;
+    top: 0;
+    right: 0;
+    margin-top: 10vh;
+  }
+  div#menu button {
+    width: 90%;
+    padding: 4%;
+    margin: 0 auto;
+    margin-bottom: 2%;
+    margin-top: 2%;
+  }
+
+  div#menu button:hover {
+    border: 1px solid grey;
+  }
+}
+
+@media all and (max-width: 600px) {
+  article {
+    padding-top: 1vh;
+  }
+  input[type="checkbox"]:checked ~ #menu {
+    width: 50vw;
+  }
+  ul,
+  article {
+    width: 80vw;
+  }
+  form {
+    width: 70vw;
+  }
+  select {
+    width: 40vw;
   }
 }

@@ -23,7 +23,11 @@ class Topics extends Component {
         />
       );
     else
-      return <List list={articlesByTopic} func={utils.formatArticleByTopic} />;
+      return (
+        <div className="white-background">
+          <List list={articlesByTopic} func={utils.formatArticleByTopic} />
+        </div>
+      );
   }
 
   componentDidMount() {

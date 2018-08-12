@@ -22,9 +22,9 @@ class SingleArticle extends Component {
       );
     else
       return (
-        <article>
+        <article className="white-background">
           {articleById.title && (
-            <section>
+            <div>
               <h3>{articleById.title}</h3>
               <p>{utils.formatDate(articleById.created_at)}</p>
               <p>
@@ -39,14 +39,14 @@ class SingleArticle extends Component {
                   disabled={this.state.isDisabled}
                   onClick={() => this.handleVote("up")}
                 >
-                  +
+                  <i className="fas fa-arrow-up" />
                 </button>
                 {articleById.votes + voteChange}
                 <button
                   disabled={this.state.isDisabled}
                   onClick={() => this.handleVote("down")}
                 >
-                  -
+                  <i className="fas fa-arrow-down" />
                 </button>
               </p>
 
@@ -56,7 +56,7 @@ class SingleArticle extends Component {
                   {articleById.comments}
                 </Link>
               </p>
-            </section>
+            </div>
           )}
         </article>
       );

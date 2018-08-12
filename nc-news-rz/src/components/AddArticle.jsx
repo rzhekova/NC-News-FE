@@ -25,39 +25,41 @@ class AddArticle extends Component {
     }
     if (isAdded) {
       return <Redirect to={`topics/${topic}/articles`} />;
-    }
-    return (
-      <form onSubmit={this.handleSubmit}>
-        Title:
-        <input
-          onChange={event => this.handleChange(event.target.value, "title")}
-          value={title}
-          type="text"
-        />
-        Username:
-        <SelectUser handleChange={this.handleChange} />
-        Topic:
-        <select
-          onChange={event => this.handleChange(event.target.value, "topic")}
-        >
-          <option>Choose a topic</option>
-          {topics.map(topic => {
-            return (
-              <option key={topic._id} value={topic.slug}>
-                {topic.title}
-              </option>
-            );
-          })}
-        </select>
-        Article:
-        <textarea
-          onChange={event => this.handleChange(event.target.value, "body")}
-          value={body}
-          type="text"
-        />
-        <button className="submit">Submit</button>
-      </form>
-    );
+    } else
+      return (
+        <div className="white-background">
+          <form onSubmit={this.handleSubmit}>
+            Title:
+            <input
+              onChange={event => this.handleChange(event.target.value, "title")}
+              value={title}
+              type="text"
+            />
+            Username:
+            <SelectUser handleChange={this.handleChange} />
+            Topic:
+            <select
+              onChange={event => this.handleChange(event.target.value, "topic")}
+            >
+              <option>Choose a topic</option>
+              {topics.map(topic => {
+                return (
+                  <option key={topic._id} value={topic.slug}>
+                    {topic.title}
+                  </option>
+                );
+              })}
+            </select>
+            Article:
+            <textarea
+              onChange={event => this.handleChange(event.target.value, "body")}
+              value={body}
+              type="text"
+            />
+            <button className="submit">Submit</button>
+          </form>
+        </div>
+      );
   }
 
   handleChange = (value, key) => {
