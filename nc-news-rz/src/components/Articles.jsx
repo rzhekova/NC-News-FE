@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import AllArticles from "./AllArticles";
 import { Redirect } from "react-router-dom";
+import PT from "prop-types";
 
 class Articles extends Component {
   state = {
@@ -21,12 +22,13 @@ class Articles extends Component {
   }
 
   componentDidMount() {
+    const { func } = this.props;
     api
       .fetchAllArticles()
       .then(allArticles => {
         let articles;
-        if (this.props.func) {
-          articles = allArticles.filter(article => this.props.func(article));
+        if (func) {
+          articles = allArticles.filter(article => func(article));
         } else {
           articles = allArticles;
         }
@@ -37,5 +39,9 @@ class Articles extends Component {
       });
   }
 }
+
+Articles.propTypes = {
+  func: PT.func
+};
 
 export default Articles;

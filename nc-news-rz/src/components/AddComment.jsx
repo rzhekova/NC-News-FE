@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SelectUser from "./SelectUser";
+import PT from "prop-types";
 
 class AddComment extends Component {
   state = {
@@ -10,7 +11,7 @@ class AddComment extends Component {
     return (
       <form onSubmit={this.handleAddArticle}>
         Username:
-        <SelectUser func={this.handleChange} />
+        <SelectUser handleChange={this.handleChange} />
         Comment:
         <textarea
           value={this.state.body}
@@ -35,5 +36,9 @@ class AddComment extends Component {
     });
   };
 }
+
+AddComment.propTypes = {
+  handleSubmit: PT.func.isRequired
+};
 
 export default AddComment;

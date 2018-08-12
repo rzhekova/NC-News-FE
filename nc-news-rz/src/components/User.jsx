@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as api from "../api";
 import { Redirect } from "react-router-dom";
+import PT from "prop-types";
 
 class User extends Component {
   state = {
@@ -43,5 +44,13 @@ class User extends Component {
       .catch(error => this.setState({ errorCode: error.response.status }));
   }
 }
+
+User.propTypes = {
+  match: PT.shape({
+    params: PT.shape({
+      username: PT.string.isRequired
+    })
+  })
+};
 
 export default User;

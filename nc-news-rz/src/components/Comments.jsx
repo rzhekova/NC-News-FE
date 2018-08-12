@@ -4,10 +4,12 @@ import * as utils from "../utils/utils";
 import List from "./List";
 import { Link, Redirect } from "react-router-dom";
 import AddComment from "./AddComment";
+import PT from "prop-types";
 
 class Comments extends Component {
   state = {
     comments: [],
+    isDisabled: false,
     errorCode: null
   };
   render() {
@@ -18,16 +20,16 @@ class Comments extends Component {
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
         />
       );
-    return (
-      <div>
-        {comments[0] && <h3>Comments for "{comments[0].belongs_to.title}"</h3>}
-        <List list={comments} func={this.formatComments} />
-        <AddComment
-          articleId={this.props.match.params.articleId}
-          handleSubmit={this.handleSubmit}
-        />
-      </div>
-    );
+    else
+      return (
+        <div>
+          {comments[0] && (
+            <h3>Comments for "{comments[0].belongs_to.title}"</h3>
+          )}
+          <List list={comments} func={this.formatComments} />
+          <AddComment handleSubmit={this.handleSubmit} />
+        </div>
+      );
   }
 
   componentDidMount() {
@@ -56,11 +58,17 @@ class Comments extends Component {
           </p>
           <p>
             votes:{" "}
-            <button onClick={() => this.handleVote("up", commentObject._id)}>
+            <button
+              disabled={this.state.isDisabled}
+              onClick={() => this.handleVote("up", commentObject._id)}
+            >
               +
             </button>
             {commentObject.votes}
-            <button onClick={() => this.handleVote("down", commentObject._id)}>
+            <button
+              disabled={this.state.isDisabled}
+              onClick={() => this.handleVote("down", commentObject._id)}
+            >
               -
             </button>
           </p>
@@ -68,6 +76,7 @@ class Comments extends Component {
         <button onClick={() => this.handleDelete(commentObject._id)}>
           Delete
         </button>
+        <hr />
       </main>
     );
   };
@@ -88,7 +97,8 @@ class Comments extends Component {
       } else return comment;
     });
     this.setState({
-      comments
+      comments,
+      isDisabled: true
     });
   };
 
@@ -115,5 +125,13 @@ class Comments extends Component {
     }
   };
 }
+
+Comments.propTypes = {
+  match: PT.shape({
+    params: PT.shape({
+      articleId: PT.string.isRequired
+    })
+  })
+};
 
 export default Comments;

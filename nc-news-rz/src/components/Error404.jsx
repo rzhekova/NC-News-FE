@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PT from "prop-types";
 
 const Error404 = props => {
   return (
@@ -12,6 +13,14 @@ const Error404 = props => {
       </button>
     </div>
   );
+};
+
+Error404.propTypes = {
+  location: PT.shape({
+    state: PT.shape({
+      from: PT.string
+    })
+  })
 };
 
 export default Error404;

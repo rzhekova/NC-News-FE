@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import * as utils from "../utils/utils";
+import PT from "prop-types";
 
 const AllArticles = ({ articles }) => {
   return (
@@ -28,6 +29,10 @@ const AllArticles = ({ articles }) => {
       })}
     </ul>
   );
+};
+
+AllArticles.propTypes = {
+  articles: PT.arrayOf(PT.object).isRequired
 };
 
 export default AllArticles;

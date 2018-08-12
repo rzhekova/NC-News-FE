@@ -2,52 +2,64 @@ import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import * as api from "../api";
 import * as utils from "../utils/utils";
+import PT from "prop-types";
 
 class SingleArticle extends Component {
   state = {
     articleById: {},
     voteChange: 0,
+    isDisabled: false,
     errorCode: null
   };
 
   render() {
     const { articleById, voteChange, errorCode } = this.state;
-    if (errorCode) {
+    if (errorCode)
       return (
         <Redirect
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
         />
       );
-    }
-    return (
-      <article>
-        {articleById.title && (
-          <section>
-            <h3>{articleById.title}</h3>
-            <p>{utils.formatDate(articleById.created_at)}</p>
-            <p>
-              by:{" "}
-              <Link to={`/users/${articleById.created_by.username}`}>
-                {articleById.created_by.username}
-              </Link>
-            </p>
-            {articleById.body}
-            <p>
-              <button onClick={() => this.handleVote("up")}>+</button>
-              {articleById.votes + voteChange}
-              <button onClick={() => this.handleVote("down")}>-</button>
-            </p>
+    else
+      return (
+        <article>
+          {articleById.title && (
+            <section>
+              <h3>{articleById.title}</h3>
+              <p>{utils.formatDate(articleById.created_at)}</p>
+              <p>
+                by:{" "}
+                <Link to={`/users/${articleById.created_by.username}`}>
+                  {articleById.created_by.username}
+                </Link>
+              </p>
+              {articleById.body}
+              <p>
+                <button
+                  disabled={this.state.isDisabled}
+                  onClick={() => this.handleVote("up")}
+                >
+                  +
+                </button>
+                {articleById.votes + voteChange}
+                <button
+                  disabled={this.state.isDisabled}
+                  onClick={() => this.handleVote("down")}
+                >
+                  -
+                </button>
+              </p>
 
-            <p>
-              Comments:{" "}
-              <Link to={`/${articleById._id}/comments`}>
-                {articleById.comments}
-              </Link>
-            </p>
-          </section>
-        )}
-      </article>
-    );
+              <p>
+                Comments:{" "}
+                <Link to={`/${articleById._id}/comments`}>
+                  {articleById.comments}
+                </Link>
+              </p>
+            </section>
+          )}
+        </article>
+      );
   }
 
   componentDidMount() {
@@ -65,8 +77,10 @@ class SingleArticle extends Component {
   }
 
   handleVote = query => {
-    api.updateVoteCount(query, this.props.match.params.articleId, "articles");
+    const { articleId } = this.props.match.params;
+    api.updateVoteCount(query, articleId, "articles");
     this.setState({
+      isDisabled: true,
       voteChange:
         query === "up"
           ? this.state.voteChange + 1
@@ -76,4 +90,13 @@ class SingleArticle extends Component {
     });
   };
 }
+
+SingleArticle.propTypes = {
+  match: PT.shape({
+    params: PT.shape({
+      articleId: PT.string.isRequired
+    })
+  })
+};
+
 export default SingleArticle;

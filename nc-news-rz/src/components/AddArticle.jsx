@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as api from "../api";
 import SelectUser from "./SelectUser";
 import { Redirect } from "react-router-dom";
+import PT from "prop-types";
 
 class AddArticle extends Component {
   state = {
@@ -34,7 +35,7 @@ class AddArticle extends Component {
           type="text"
         />
         Username:
-        <SelectUser func={this.handleChange} />
+        <SelectUser handleChange={this.handleChange} />
         Topic:
         <select
           onChange={event => this.handleChange(event.target.value, "topic")}
@@ -66,7 +67,7 @@ class AddArticle extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { title, body, topic, created_by } = this.state;
-    if (topic && topic && title && created_by) {
+    if (topic && body && title && created_by) {
       api.addArticle(topic, { title, body, created_by }).then(() => {
         this.setState({
           isAdded: true
@@ -78,5 +79,9 @@ class AddArticle extends Component {
     }
   };
 }
+
+AddArticle.propTypes = {
+  topics: PT.arrayOf(PT.object).isRequired
+};
 
 export default AddArticle;

@@ -1,8 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway");
-@import url("https://fonts.googleapis.com/css?family=Poller+One");
-/* @import url("https://fonts.googleapis.com/css?family=Vast+Shadow");
-@import url("https://fonts.googleapis.com/css?family=Bungee+Shade");
-@import url("https://fonts.googleapis.com/css?family=Sonsie+One"); */
+@import url("https://fonts.googleapis.com/css?family=Raleway|Poller+One");
 
 .App {
   text-align: center;
@@ -11,7 +7,13 @@
 .App-title {
   font-size: 1.5em;
 }
-
+hr {
+  margin-top: 3vh;
+  border: 0;
+  color: lightblue;
+  background-color: lightblue;
+  height: 1px;
+}
 nav,
 .title {
   font-family: "Poller One", cursive;
@@ -33,7 +35,14 @@ nav {
 .title {
   font-size: 30px;
   color: white;
+  transition: 0.4s;
 }
+
+.title:hover {
+  font-size: 35px;
+  color: lightblue;
+}
+
 body {
   margin: 0;
   padding-top: 16vh;
@@ -46,6 +55,12 @@ a {
 }
 
 li {
+  margin: 10px 10px;
+  padding: 3%;
+  list-style-type: none;
+}
+
+li.article {
   border: 1px solid lightblue;
   padding: 7%;
   list-style-type: none;

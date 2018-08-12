@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import * as api from "../api";
 import * as utils from "../utils/utils";
 import List from "./List";
+import PT from "prop-types";
 
 class Topics extends Component {
   state = {
@@ -12,7 +13,7 @@ class Topics extends Component {
 
   render() {
     const { articlesByTopic, errorCode } = this.state;
-    if (errorCode) {
+    if (errorCode)
       return (
         <Redirect
           to={{
@@ -21,8 +22,8 @@ class Topics extends Component {
           }}
         />
       );
-    }
-    return <List list={articlesByTopic} func={utils.formatArticleByTopic} />;
+    else
+      return <List list={articlesByTopic} func={utils.formatArticleByTopic} />;
   }
 
   componentDidMount() {
@@ -34,6 +35,7 @@ class Topics extends Component {
       })
       .catch(error => this.setState({ errorCode: error.response.status }));
   }
+
   componentDidUpdate(prevProps) {
     const { topic } = this.props.match.params;
     if (prevProps.match.params.topic !== topic) {
@@ -43,5 +45,13 @@ class Topics extends Component {
     }
   }
 }
+
+Topics.propTypes = {
+  match: PT.shape({
+    params: PT.shape({
+      topic: PT.string.isRequired
+    })
+  })
+};
 
 export default Topics;

@@ -1,4 +1,5 @@
 import React from "react";
+import PT from "prop-types";
 
 const List = ({ list, func }) => {
   return (
@@ -8,6 +9,11 @@ const List = ({ list, func }) => {
       })}
     </ul>
   );
+};
+
+List.propTypes = {
+  list: PT.arrayOf(PT.object).isRequired,
+  func: PT.func.isRequired
 };
 
 export default List;
