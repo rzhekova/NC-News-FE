@@ -47,7 +47,7 @@ class App extends Component {
               <Link to="/articles">All Articles</Link>
             </button>
             <button>
-              <Link to="/add-article">Add Article</Link>
+              <Link to="/add-article">Add Content</Link>
             </button>
             <p style={{ textDecoration: "underline" }}>Topics:</p>
             {this.state.topics.map(topic => this.createTopicsLinks(topic))}
