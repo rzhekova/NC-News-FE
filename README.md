@@ -4,7 +4,7 @@
 
 Northcoders News fetches data from the [NC NEWS API](https://rosies-ncnews.herokuapp.com/) to create a news website where users can read articles, post new content and comment on individual articles.
 
-Here is an example Northcoders News page:
+Here is an example Northcoders News page: [NC NEWS](https://heuristic-williams-b4919a.netlify.com)
 
 ### Prerequisites
 
