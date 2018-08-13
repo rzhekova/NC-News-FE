@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import AllArticles from "./AllArticles";
 import { Redirect } from "react-router-dom";
 import PT from "prop-types";
+import List from "./List";
 
 class Articles extends Component {
   state = {
@@ -18,10 +18,7 @@ class Articles extends Component {
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
         />
       );
-    else
-      return (
-        <AllArticles title={this.props.title} articles={this.state.articles} />
-      );
+    else return <List title={this.props.title} list={this.state.articles} />;
   }
 
   componentDidMount() {

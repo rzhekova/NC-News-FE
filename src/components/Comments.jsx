@@ -38,6 +38,9 @@ class Comments extends Component {
     api
       .fetchCommentsByArticleId(articleId)
       .then(comments => {
+        comments.sort((a, b) => {
+          return a["created_at"].localeCompare(b["created_at"]);
+        });
         this.setState({
           comments
         });
