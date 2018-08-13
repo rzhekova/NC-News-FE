@@ -45,9 +45,9 @@ const List = ({ title, list, func }) => {
 };
 
 List.propTypes = {
-  title: PT.string.isRequired,
+  title: PT.string,
   list: PT.arrayOf(PT.object).isRequired,
-  func: PT.func.isRequired
+  func: PT.func
 };
 
 export default List;

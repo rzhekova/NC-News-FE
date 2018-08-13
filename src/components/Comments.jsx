@@ -13,7 +13,7 @@ class Comments extends Component {
   };
   render() {
     const { comments, errorCode } = this.state;
-    if (errorCode)
+    if (errorCode === 400)
       return (
         <Redirect
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
@@ -48,12 +48,7 @@ class Comments extends Component {
           comments
         });
       })
-      .catch(
-        error =>
-          articleId.length !== 24
-            ? this.setState({ errorCode: error.response.status })
-            : null
-      );
+      .catch(error => this.setState({ errorCode: error.response.status }));
   }
 
   formatComments = commentObject => {
@@ -133,7 +128,8 @@ class Comments extends Component {
         .addComment(this.props.match.params.articleId, { created_by, body })
         .then(comment => {
           this.setState({ comments: [...this.state.comments, comment] });
-        });
+        })
+        .catch(error => alert("This article does not exist"));
     } else {
       alert("Please fill in all the fields to post a comment");
     }
