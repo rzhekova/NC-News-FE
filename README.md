@@ -1,7 +1,5 @@
 ## Northcoders News
 
----
-
 ### Background
 
 Northcoders News fetches data from the [NC NEWS API](https://rosies-ncnews.herokuapp.com/) to create a news website where users can read articles, post new content and comment on individual articles.
@@ -45,4 +43,4 @@ This will execute the `react-scripts start` script which is part of React Script
 
 There are a number of options to host your news website. Netlify is one of them, and the link below describes how you can deploy the app quickly and easily.
 
-[Netlify](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/)
+[Netlify - Deploy React Apps in less than 30 Seconds](https://www.netlify.com/blog/2016/07/22/deploy-react-apps-in-less-than-30-seconds/)
