@@ -22,10 +22,14 @@ article.white-background > div {
   margin: 0 auto;
   margin-top: 5vh;
 }
+h2,
+h3,
+.error > a {
+  color: black;
+}
 
 h2 {
   margin-bottom: 5vh;
-  color: #666565;
 }
 
 hr {
@@ -215,10 +219,6 @@ select {
   width: 100px;
   border: 1px solid rgb(167, 167, 167);
   margin-left: 0;
-}
-
-.error > a {
-  color: black;
 }
 
 @media all and (max-width: 900px) {
