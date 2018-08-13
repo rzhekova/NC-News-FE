@@ -9,7 +9,6 @@ import PT from "prop-types";
 class Comments extends Component {
   state = {
     comments: [],
-    isDisabled: false,
     errorCode: null
   };
   render() {
@@ -23,11 +22,15 @@ class Comments extends Component {
     else
       return (
         <div className="white-background">
-          {comments[0] && (
-            <h4>Comments for "{comments[0].belongs_to.title}"</h4>
+          {comments.length > 0 ? (
+            <div>
+              <h4>Comments for "{comments[0].belongs_to.title}"</h4>
+              <List list={comments} func={this.formatComments} />
+              <h3>Join the conversation</h3>
+            </div>
+          ) : (
+            <h4>Be the first to post a comment</h4>
           )}
-          <List list={comments} func={this.formatComments} />
-          <h3>Join the conversation</h3>
           <AddComment handleSubmit={this.handleSubmit} />
         </div>
       );
@@ -45,7 +48,12 @@ class Comments extends Component {
           comments
         });
       })
-      .catch(error => this.setState({ errorCode: error.response.status }));
+      .catch(
+        error =>
+          articleId.length !== 24
+            ? this.setState({ errorCode: error.response.status })
+            : null
+      );
   }
 
   formatComments = commentObject => {
@@ -65,16 +73,12 @@ class Comments extends Component {
           <p>
             <button
               className="vote-up"
-              disabled={this.state.isDisabled}
               onClick={() => this.handleVote("up", commentObject._id)}
             >
               <i className="fas fa-arrow-up" />
             </button>
             {commentObject.votes}
-            <button
-              disabled={this.state.isDisabled}
-              onClick={() => this.handleVote("down", commentObject._id)}
-            >
+            <button onClick={() => this.handleVote("down", commentObject._id)}>
               <i className="fas fa-arrow-down" />
             </button>
           </p>
@@ -91,11 +95,9 @@ class Comments extends Component {
   };
 
   handleVote = (query, commentId) => {
-    let isDisabled;
     api.updateVoteCount(query, commentId, "comments");
     const comments = this.state.comments.map(comment => {
       if (comment._id === commentId) {
-        isDisabled = true;
         return {
           ...comment,
           votes:
@@ -106,13 +108,11 @@ class Comments extends Component {
                 : comment.votes
         };
       } else {
-        isDisabled = false;
         return comment;
       }
     });
     this.setState({
-      comments,
-      isDisabled
+      comments
     });
   };
 
