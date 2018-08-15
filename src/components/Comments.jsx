@@ -14,13 +14,13 @@ class Comments extends Component {
   };
   render() {
     const { comments, errorCode, commentIds } = this.state;
-    if (errorCode)
+    if (errorCode) {
       return (
         <Redirect
           to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
         />
       );
-    else
+    } else
       return (
         <div className="white-background">
           {comments[0] ? (

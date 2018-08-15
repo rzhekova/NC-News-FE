@@ -28,9 +28,9 @@ class Articles extends Component {
       .then(allArticles => {
         let articles;
         if (formatPopularArticles) {
-          articles = allArticles.filter(article =>
-            formatPopularArticles(article)
-          );
+          articles = allArticles.filter(article => {
+            return formatPopularArticles(article);
+          });
         } else {
           articles = allArticles;
         }

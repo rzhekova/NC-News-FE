@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const formatPopularArticles = articleObject => {
-  return articleObject.votes > 10;
+  return articleObject.votes > 10 && articleObject.title;
 };
 
 export const formatArticleByTopic = articleOject => {
