@@ -22,10 +22,16 @@ article.white-background > div {
   margin: 0 auto;
   margin-top: 5vh;
 }
+
 h2,
 h3,
+h4,
 .error > a {
   color: black;
+}
+
+h4 {
+  text-align: center;
 }
 
 h2 {
@@ -90,6 +96,7 @@ nav {
   justify-content: space-evenly;
   align-items: center;
 }
+
 .show-menu {
   background: none;
   text-decoration: none;
@@ -118,12 +125,9 @@ input[type="checkbox"] {
 }
 
 body {
+  font-family: "Raleway", sans-serif;
   background-color: ghostwhite;
   margin: 0;
-}
-
-body {
-  font-family: "Raleway", sans-serif;
 }
 
 a {
@@ -150,11 +154,6 @@ button > a {
   color: white;
 }
 
-.vote-up {
-  margin-left: 0;
-  padding-left: 2px;
-}
-
 span > a {
   color: grey;
   font-style: italic;
@@ -171,8 +170,12 @@ span.votes {
   padding-right: 3px;
   margin-right: 6px;
 }
+.vote-up {
+  margin-left: 0;
+  padding-left: 2px;
+}
 
-button i.fa-arrow-up {
+.fa-arrow-up {
   padding: 1%;
   margin: 0;
 }
@@ -185,11 +188,16 @@ button {
   cursor: pointer;
 }
 
-ul {
+ul,
+.comments {
   padding: 0;
   width: 50vw;
   margin: 0 auto;
   text-align: justify;
+}
+
+hr {
+  margin-bottom: 8vh;
 }
 
 img {

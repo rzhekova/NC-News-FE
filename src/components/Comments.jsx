@@ -1,18 +1,19 @@
 import React, { Component } from "react";
 import * as api from "../api";
-import * as utils from "../utils/utils";
-import List from "./List";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import AddComment from "./AddComment";
 import PT from "prop-types";
+
+import SingleComment from "./SingleComment";
 
 class Comments extends Component {
   state = {
     comments: [],
+    commentIds: [],
     errorCode: null
   };
   render() {
-    const { comments, errorCode } = this.state;
+    const { comments, errorCode, commentIds } = this.state;
     if (errorCode)
       return (
         <Redirect
@@ -23,13 +24,25 @@ class Comments extends Component {
       return (
         <div className="white-background">
           {comments[0] ? (
-            <div>
-              <h4>Comments for "{comments[0].belongs_to.title}"</h4>
-              <List list={comments} func={this.formatComments} />
-              <h3>Join the conversation</h3>
+            <div className="comments">
+              <h3 style={{ textAlign: "center", marginBottom: "6vh" }}>
+                Comments for "{comments[0].belongs_to.title}"
+              </h3>
+              {comments.map(comment => {
+                return (
+                  <SingleComment
+                    key={comment._id}
+                    commentIds={commentIds}
+                    handleVote={this.handleVote}
+                    handleDelete={this.handleDelete}
+                    commentObject={comment}
+                  />
+                );
+              })}
+              <h4>Join the conversation</h4>
             </div>
           ) : (
-            <h4>Be the first to post a comment</h4>
+            <h3>Be the first to post a comment</h3>
           )}
           <AddComment handleSubmit={this.handleSubmit} />
         </div>
@@ -53,44 +66,6 @@ class Comments extends Component {
       });
   }
 
-  formatComments = commentObject => {
-    return (
-      <main>
-        <p>
-          "<i>{commentObject.body}</i>"
-        </p>
-        <p>{utils.formatDate(commentObject.created_at)}</p>
-        <span>
-          <p>
-            posted by:{" "}
-            <Link to={`/users/${commentObject.created_by.username}`}>
-              {commentObject.created_by.username}
-            </Link>
-          </p>
-          <p>
-            <button
-              className="vote-up"
-              onClick={() => this.handleVote("up", commentObject._id)}
-            >
-              <i className="fas fa-arrow-up" />
-            </button>
-            {commentObject.votes}
-            <button onClick={() => this.handleVote("down", commentObject._id)}>
-              <i className="fas fa-arrow-down" />
-            </button>
-          </p>
-        </span>
-        <button
-          style={{ border: "1px solid rgb(167, 167, 167)", marginLeft: "0" }}
-          onClick={() => this.handleDelete(commentObject._id)}
-        >
-          Delete
-        </button>
-        <hr />
-      </main>
-    );
-  };
-
   handleVote = (query, commentId) => {
     api.updateVoteCount(query, commentId, "comments");
     const comments = this.state.comments.map(comment => {
@@ -109,7 +84,8 @@ class Comments extends Component {
       }
     });
     this.setState({
-      comments
+      comments,
+      commentIds: [...this.state.commentIds, commentId]
     });
   };
 

@@ -22,13 +22,15 @@ class Articles extends Component {
   }
 
   componentDidMount() {
-    const { func } = this.props;
+    const { formatPopularArticles } = this.props;
     api
       .fetchAllArticles()
       .then(allArticles => {
         let articles;
-        if (func) {
-          articles = allArticles.filter(article => func(article));
+        if (formatPopularArticles) {
+          articles = allArticles.filter(article =>
+            formatPopularArticles(article)
+          );
         } else {
           articles = allArticles;
         }
@@ -41,7 +43,7 @@ class Articles extends Component {
 }
 
 Articles.propTypes = {
-  func: PT.func,
+  formatPopularArticles: PT.func,
   title: PT.string
 };
 

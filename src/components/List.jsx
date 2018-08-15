@@ -1,7 +1,7 @@
 import React from "react";
 import PT from "prop-types";
 import { Link } from "react-router-dom";
-import * as utils from "../utils/utils";
+import moment from "moment";
 
 const List = ({ title, list, func }) => {
   if (func) {
@@ -34,7 +34,13 @@ const List = ({ title, list, func }) => {
                     {article.created_by.username}
                   </Link>
                 </p>
-                <p>{utils.formatDate(article.created_at)}</p>
+                <p>
+                  {article.created_at &&
+                    moment(
+                      article.created_at.slice(0, 10),
+                      "YYYY-MM-DD"
+                    ).fromNow()}
+                </p>
               </li>
             );
           })}

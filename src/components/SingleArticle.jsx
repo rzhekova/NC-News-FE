@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import * as api from "../api";
-import * as utils from "../utils/utils";
 import PT from "prop-types";
+import moment from "moment";
 
 class SingleArticle extends Component {
   state = {
@@ -26,7 +26,13 @@ class SingleArticle extends Component {
           {articleById.title && (
             <div>
               <h3>{articleById.title}</h3>
-              <p>{utils.formatDate(articleById.created_at)}</p>
+              <p>
+                {articleById.created_at &&
+                  moment(
+                    articleById.created_at.slice(0, 10),
+                    "YYYY-MM-DD"
+                  ).fromNow()}
+              </p>
               <p>
                 by:{" "}
                 <Link to={`/users/${articleById.created_by.username}`}>
