@@ -172,14 +172,9 @@ span.votes {
   margin-right: 6px;
 }
 
-.fa-arrow-up {
-  color: darkgreen;
+button i.fa-arrow-up {
   padding: 1%;
   margin: 0;
-}
-
-button i.fa-arrow-down {
-  color: darkred;
 }
 
 button {

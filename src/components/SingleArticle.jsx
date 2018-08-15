@@ -8,11 +8,12 @@ class SingleArticle extends Component {
   state = {
     articleById: {},
     voteChange: 0,
+    isDisabled: false,
     errorCode: null
   };
 
   render() {
-    const { articleById, voteChange, errorCode } = this.state;
+    const { articleById, voteChange, errorCode, isDisabled } = this.state;
     if (errorCode)
       return (
         <Redirect
@@ -35,14 +36,28 @@ class SingleArticle extends Component {
               {articleById.body}
               <p>
                 <button
+                  disabled={isDisabled}
                   className="vote-up"
                   onClick={() => this.handleVote("up")}
                 >
-                  <i className="fas fa-arrow-up" />
+                  <i
+                    className="fas fa-arrow-up"
+                    style={
+                      isDisabled ? { color: "grey" } : { color: "darkgreen" }
+                    }
+                  />
                 </button>
                 {articleById.votes + voteChange}
-                <button onClick={() => this.handleVote("down")}>
-                  <i className="fas fa-arrow-down" />
+                <button
+                  disabled={isDisabled}
+                  onClick={() => this.handleVote("down")}
+                >
+                  <i
+                    className="fas fa-arrow-down"
+                    style={
+                      isDisabled ? { color: "grey" } : { color: "darkred" }
+                    }
+                  />
                 </button>
               </p>
 
@@ -76,6 +91,7 @@ class SingleArticle extends Component {
     const { articleId } = this.props.match.params;
     api.updateVoteCount(query, articleId, "articles");
     this.setState({
+      isDisabled: true,
       voteChange:
         query === "up"
           ? this.state.voteChange + 1
