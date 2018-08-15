@@ -15,8 +15,7 @@ const SingleComment = ({
         "<i>{commentObject.body}</i>"
       </p>
       <p>
-        {commentObject.created_at &&
-          moment(commentObject.created_at.slice(0, 10), "YYYY-MM-DD").fromNow()}
+        {commentObject.created_at && moment(commentObject.created_at).from()}
       </p>
       <span>
         <p>

@@ -34,13 +34,7 @@ const List = ({ title, list, func }) => {
                     {article.created_by.username}
                   </Link>
                 </p>
-                <p>
-                  {article.created_at &&
-                    moment(
-                      article.created_at.slice(0, 10),
-                      "YYYY-MM-DD"
-                    ).fromNow()}
-                </p>
+                <p>{article.created_at && moment(article.created_at).from()}</p>
               </li>
             );
           })}

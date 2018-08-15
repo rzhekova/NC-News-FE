@@ -28,10 +28,7 @@ class SingleArticle extends Component {
               <h3>{articleById.title}</h3>
               <p>
                 {articleById.created_at &&
-                  moment(
-                    articleById.created_at.slice(0, 10),
-                    "YYYY-MM-DD"
-                  ).fromNow()}
+                  moment(articleById.created_at).from()}
               </p>
               <p>
                 by:{" "}
