@@ -69,7 +69,8 @@ const SingleComment = ({
 SingleComment.propTypes = {
   commentObject: PT.object.isRequired,
   handleVote: PT.func.isRequired,
-  handleDelete: PT.func.isRequired
+  handleDelete: PT.func.isRequired,
+  commentIds: PT.arrayOf(PT.string).isRequired
 };
 
 export default SingleComment;

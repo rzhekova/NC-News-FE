@@ -39,6 +39,12 @@ export const fetchUser = username => {
   });
 };
 
+export const fetchAllUsers = () => {
+  return axios.get(`${URL}users`).then(({ data }) => {
+    return data.users;
+  });
+};
+
 export const updateVoteCount = (query, id, endpoint) => {
   if (query === "up" || query === "down") {
     return axios

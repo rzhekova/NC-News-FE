@@ -105,7 +105,9 @@ class Comments extends Component {
       api
         .addComment(this.props.match.params.articleId, { created_by, body })
         .then(comment => {
-          this.setState({ comments: [...this.state.comments, comment] });
+          this.setState({
+            comments: [...this.state.comments, comment]
+          });
         });
     } else {
       alert("Please fill in all the fields to post a comment");
