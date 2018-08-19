@@ -16,9 +16,7 @@ class Comments extends Component {
     const { comments, errorCode, commentIds } = this.state;
     if (errorCode) {
       return (
-        <Redirect
-          to={{ pathname: `/${errorCode}`, state: { from: "articles" } }}
-        />
+        <Redirect to={{ pathname: `/${errorCode}`, state: { from: "home" } }} />
       );
     } else
       return (

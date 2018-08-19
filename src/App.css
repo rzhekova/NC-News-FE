@@ -52,6 +52,12 @@ nav a {
   font-family: "Poller One", cursive;
 }
 
+.homepage-paragraph {
+  margin: 0 auto;
+  margin-bottom: 6vh;
+  width: 37vw;
+}
+
 nav a,
 footer {
   font-weight: lighter;
@@ -235,7 +241,37 @@ select {
   margin-left: 0;
 }
 
+.filter {
+  border: 1px solid rgb(167, 167, 167);
+}
+
+.articles-by-topic {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.articles-by-topic > div {
+  border: 1px solid lightgrey;
+  text-align: center;
+  height: 180px;
+  margin: 1%;
+  padding-top: 5%;
+}
+
 @media all and (max-width: 1100px) {
+  .homepage-paragraph {
+    width: 45vw;
+  }
+
+  .articles-by-topic {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .articles-by-topic > div {
+    font-size: 14px;
+  }
+
   .title {
     font-size: 21px;
   }
@@ -251,8 +287,14 @@ select {
     width: 70vw;
   }
 
+  .articles-by-topic > div {
+    height: 15vh;
+    padding-bottom: 10%;
+  }
+
   ul,
-  article {
+  article,
+  .homepage-paragraph {
     width: 70vw;
   }
 
@@ -297,7 +339,7 @@ select {
     position: inherit;
     top: 0;
     right: 0;
-    margin-top: 10.5vh;
+    margin-top: 7.8vh;
   }
   div#mobile button {
     width: 100%;
@@ -310,6 +352,10 @@ select {
   div#mobile button:hover {
     background-color: #0f5f5f;
   }
+
+  .articles-by-topic > div {
+    font-size: 14px;
+  }
 }
 
 @media all and (max-width: 600px) {
@@ -319,13 +365,18 @@ select {
     width: 70vw;
   }
 
+  .homepage-paragraph {
+    font-size: 14px;
+  }
+
+  .filter {
+    font-size: 10px;
+    margin-right: 0;
+  }
+
   div#mobile button:hover {
     background-color: #0f5f5f;
     height: 90%;
-  }
-
-  input[type="checkbox"]:checked ~ #mobile {
-    margin-top: 10.7vh;
   }
 
   .title,
@@ -342,8 +393,14 @@ select {
     width: 60vw;
   }
 
+  .articles-by-topic {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   input[type="checkbox"]:checked ~ #mobile {
     width: 50vw;
+    overflow: auto;
   }
   ul,
   article {
@@ -360,6 +417,12 @@ select {
     font-size: 11px;
   }
   li.article {
-    font-size: 14px;
+    font-size: 13px;
+  }
+}
+
+@media all and (max-height: 650px) {
+  .articles-by-topic > div {
+    height: 100px;
   }
 }

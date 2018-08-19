@@ -7,9 +7,9 @@ const Error400 = ({ location }) => {
     <div className="white-background">
       {location.state.from && (
         <div>
-          <h4>There are no {location.state.from} here</h4>
+          <h4>There are no articles here</h4>
           <button style={{ border: "1px solid black" }} className="error">
-            <Link to={`/articles`}>Back to articles</Link>
+            <Link to={"/"}>Back to homepage</Link>
           </button>
         </div>
       )}

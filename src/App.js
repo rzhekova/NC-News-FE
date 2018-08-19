@@ -4,20 +4,22 @@ import "./App.css";
 import Home from "./components/Home";
 import { Route, Switch, Link } from "react-router-dom";
 import Topics from "./components/Topics";
-import Articles from "./components/Articles";
 import User from "./components/User";
 import Error404 from "./components/Error404";
 import Error400 from "./components/Error400";
 import Comments from "./components/Comments";
 import SingleArticle from "./components/SingleArticle";
 import AddArticle from "./components/AddArticle";
+import TopicLinks from "./components/TopicLinks";
 
 class App extends Component {
   state = {
-    topics: []
+    topics: [],
+    isLoading: true
   };
 
   render() {
+    const { topics } = this.state;
     return (
       <div className="App">
         <nav className="laptop">
@@ -27,15 +29,15 @@ class App extends Component {
           <section id="nav">
             <span>
               <button>
-                <Link to="/articles">All Articles</Link>
-              </button>
-              <button>
                 <Link to="/add-article">Add Content</Link>
               </button>
             </span>
             {" | "}
             Topics:
-            {this.state.topics.map(topic => this.createTopicsLinks(topic))}
+            <TopicLinks
+              topics={topics}
+              createTopicsLinks={this.createTopicsLinks}
+            />
           </section>
           <label htmlFor="show-menu" className="show-menu">
             <i className="fas fa-bars" />
@@ -43,14 +45,15 @@ class App extends Component {
           <input type="checkbox" id="show-menu" role="button" />
 
           <div id="mobile">
-            <button>
-              <Link to="/articles">All Articles</Link>
-            </button>
+            <br />
             <button>
               <Link to="/add-article">Add Content</Link>
             </button>
             <p style={{ textDecoration: "underline" }}>Topics:</p>
-            {this.state.topics.map(topic => this.createTopicsLinks(topic))}
+            <TopicLinks
+              topics={topics}
+              createTopicsLinks={this.createTopicsLinks}
+            />
           </div>
         </nav>
 
@@ -59,7 +62,6 @@ class App extends Component {
           <Route path="/users/:username" component={User} />
           <Route path="/articles/:articleId" component={SingleArticle} />
           <Route path="/:articleId/comments" component={Comments} />
-          <Route path="/articles" component={Articles} />
           <Route
             path="/add-article"
             render={() => <AddArticle topics={this.state.topics} />}

@@ -1,18 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 import Articles from "./Articles";
-import * as utils from "../utils/utils";
 
-class Home extends Component {
-  render() {
-    return (
-      <div>
-        <Articles
-          title={"POPULAR"}
-          formatPopularArticles={utils.formatPopularArticles}
-        />
-      </div>
-    );
-  }
-}
+const Home = () => {
+  return (
+    <div>
+      <Articles />
+    </div>
+  );
+};
 
 export default Home;
